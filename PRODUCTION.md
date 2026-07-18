@@ -9,6 +9,9 @@ Next task: integrate research corrections; self-host fonts; meta/OG; heading ord
   Broken-anchor branch `ci-gate-proof` → run 29654623054 **failure**; main → run 29654622459 **success**. Branch deleted after proof.
   Local: `python3 check.py` → "OK: 113 ids unique, 12 internal anchors resolve, JS parses"; `npx html-validate@11.5.6 index.html` → clean (config: recommended preset, no-inline-style off — deliberate single-file design).
 - Phase 1 bonus: table markup surgery (39 tables → thead/tbody + th scope) fixed Lighthouse td-has-header + wcag/h63 and activated previously-dead `tbody tr:hover` CSS. Visually verified in browser before push.
+- Phase 2 (2026-07-18): self-hosted Inter+Sora as inline variable WOFF2 data URIs. Browser check: `document.fonts` both "loaded", `performance.getEntriesByType('resource')` external = **[]** (zero third-party requests). Only remaining dep removed.
+- Phase 7 (2026-07-18): heading-order violations **6→0** (browser walk of h1–h6: `orderViolations: []`); h5 count 32→0 (→p.klabel); meta description + OG/Twitter present; og.png 1200×630 resolves. Mobile (390px): TOC collapses under `<details>` (`tocOpenOnMobile:false`), desktop always-open (`tocOpenDesktop:true`). Screenshotted both.
+- Phase 6 (2026-07-18): deploy.sh gate→push→sync. **Rollback drill:** `git revert --no-edit HEAD` → gate re-ran green → `git reset --hard c5cd849` restored. Rollback command for Pages = `git revert HEAD && git push origin main`. CI green on all main pushes (runs 2965462xxxx).
 
 ## Inventory
 - **App:** single-file static HTML learning guide (`index.html`, 3,003 lines, 339KB raw / 105KB gzipped). Inline CSS + vanilla JS. No build step, no framework, no JS deps.
@@ -53,7 +56,10 @@ Next task: integrate research corrections; self-host fonts; meta/OG; heading ord
 - 2026-07-18 — Tier A-static: Phase 4 = git history (sufficient), Phase 5 = skipped (GitHub Pages status page; no runtime to observe). — agent per playbook tier matching
 
 ## Runbook
-Deploy: (to be defined Phase 6)   Rollback: git revert + push (to be proven Phase 6)
+Deploy: `./deploy.sh "msg"` (gate → commit → push → sync reading copy)
+Rollback: `git revert HEAD && git push origin main` (proven 2026-07-18)
+Reading copy (kept in sync by deploy.sh): `/Users/Ashish/Learnings/ServiceNow SAM Pro Training/SAM-Pro-Zero-to-Mastery-Guide.html`
+CI: `.github/workflows/ci.yml` — html-validate@11.5.6 + check.py on push/PR
 
 ## Backlog
 - README.md for the repo (has none).
