@@ -443,6 +443,17 @@ details.qa .a p{margin:.3em 0}
 }
 .top:hover{transform:translateY(-3px) scale(1.05)}
 footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);color:var(--mut);font-size:.85rem}
+/* ============ CREDIT BYLINE ============ */
+.byline{
+  display:inline-flex;align-items:center;gap:10px;margin-top:18px;
+  padding:8px 16px 8px 8px;border:1px solid var(--line2);border-radius:99px;
+  background:var(--panel);box-shadow:var(--shadow);font-size:.85rem;color:var(--mut);
+}
+.byline .av{
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:var(--grad);color:var(--acc-ink);font-family:var(--font-d);font-weight:800;font-size:.72rem;letter-spacing:.02em;
+}
+.byline b{color:var(--ink);font-weight:600}
 /* ============ DECISION TREE ============ */
 .tree{display:grid;gap:12px;margin:20px 0;justify-items:center}
 .tree .q{
@@ -533,6 +544,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
     <div class="stat"><b>140</b><span>interview Q&amp;A with answers</span></div>
     <div class="stat"><b>85+</b><span>diagrams &amp; worked calculations</span></div>
   </div>
+  <div class="byline"><span class="av">AD</span><span>Created by <b>Ashish Deshmukh</b></span></div>
 
   <h3 style="margin-top:10px">🗺️ Your learning path</h3>
   <div class="pipeline">
@@ -2878,6 +2890,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <footer>
   <p><b>ServiceNow SAM Pro: Zero to Mastery</b> · Visual field guide for SAM consultants · Compiled July 2026.</p>
+  <p>Created by <b>Ashish Deshmukh</b>.</p>
   <p>Educational material. Illustrative figures; not legal or commercial advice. Verify current publisher terms and ServiceNow release documentation before client use.</p>
 </footer>
 
