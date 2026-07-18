@@ -587,6 +587,17 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
   <div class="co story"><div class="i">📖</div><div class="b"><b>The one-line story of SAM</b>
   <p>A company buys <b>tickets</b> (licenses) and people take <b>seats</b> (installations/usage). SAM continuously compares tickets vs seats. Too few tickets = <b style="color:var(--bad)">compliance risk</b> (audit penalties). Too many tickets = <b style="color:var(--warn)">wasted money</b>. SAM Pro is the machine that counts both sides automatically, and every chapter in this guide is just a deeper look at that machine.</p></div></div>
+
+  <div class="co try" id="verified"><div class="i">🔄</div><div class="b"><b>Verified against vendor sources · 18 Jul 2026 · the 2025–26 shifts to know</b>
+  <p>Licensing changes fast, so every load-bearing fact here was re-checked this month. The moves a 2026 candidate should be able to name:</p>
+  <ul>
+    <li><b><span class="pill ms">Microsoft</span></b> Windows Server 2025 list +~10%; CAL suites up 15–20% (2025); EA Level B/C/D volume discounts removed (Nov 2025, all bands pay list); sub-2,400-seat EAs no longer renew; MPSA closed to new business (Jul 2025).</li>
+    <li><b><span class="pill ora">Oracle</span></b> Authorized Clouds now include <b>Google Cloud</b> (Jun 2024); Java free under NFTC within each version's window; ServiceNow is an Oracle-verified tool (since 2022) for DB/Options/Middleware.</li>
+    <li><b><span class="pill ibm">IBM</span></b> <b>z17</b> launched (Apr 2025, Telum II); manual sub-capacity exemption withdrawn (IPAA v11, 2023) — ILMT/approved tooling now mandatory; the IASP audit-holiday program wound down from 2025; CMP replaced by Tailored Fit Pricing.</li>
+    <li><b><span class="pill">VMware · Broadcom</span></b> vSphere 9 ships only inside <b>VCF / VVF</b> (Jun 2025); 16-core minimum per CPU; <b>20% retroactive late-renewal penalty</b>; VVF discontinued in parts of EMEA (Dec 2025).</li>
+    <li><b><span class="pill">SAP</span></b> <b>RISE</b> shifts licensing to <b>Full Usage Equivalents (FUE)</b>; ECC mainstream maintenance ends 2027 (extended to 2030) — a live migration driver; audit team (GLAC) renamed 2025.</li>
+    <li><b><span class="pill">ServiceNow</span></b> Now Learning → <b>ServiceNow University</b> (Knowledge 2025); new CIS-Data Foundations prerequisite (deadline Dec 2026).</li>
+  </ul></div></div>
 </header>
 <!-- ======================= PART 1 ======================= -->
 <section class="part" id="p1">
@@ -798,7 +809,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td class="c">3</td><td><b>Form &amp; list</b></td><td>Form = one record; list = many records with filters</td><td>Your daily UI; list filters answer most SAM questions</td></tr>
 <tr><td class="c">4</td><td><b>CMDB &amp; CI</b></td><td>Configuration Management Database; each server/VM/app is a Configuration Item</td><td>Reconciliation reads hardware attributes (cores, sockets, cluster) from CIs</td></tr>
 <tr><td class="c">5</td><td><b>MID Server</b></td><td>Small agent app installed inside the customer network that bridges cloud instance ↔ internal devices</td><td>Discovery, SCCM/ILMT imports and Oracle queries all flow through it</td></tr>
-<tr><td class="c">6</td><td><b>Plugin / Store app</b></td><td>Feature packages activated per instance</td><td>SAM Pro = plugin <code>com.sn_samp</code>; publisher packs are add-ons</td></tr>
+<tr><td class="c">6</td><td><b>Plugin / Store app</b></td><td>Feature packages activated per instance</td><td>SAM Pro core = plugin <code>com.snc.samp</code> (<code>com.sn_samp_master</code> installs core + all publisher packs); packs are add-ons</td></tr>
 <tr><td class="c">7</td><td><b>Role &amp; ACL</b></td><td>Permissions bundles controlling who sees/does what</td><td><code>sam_admin</code> configures, <code>sam_user</code> operates/views</td></tr>
 <tr><td class="c">8</td><td><b>Scheduled job</b></td><td>Automation that runs on a timer</td><td>Nightly reconciliation, content library sync, connector imports</td></tr>
 <tr><td class="c">9</td><td><b>Update set / app scope</b></td><td>Container for configuration changes moved dev → prod</td><td>Your custom metrics/rules travel in these</td></tr>
@@ -864,7 +875,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <h3 id="p2-license">2.5 How SAM Pro itself is licensed &amp; secured</h3>
 <div class="cards">
   <div class="card"><span class="ico">📦</span><b>Packaging</b><p>SAM Pro is a ServiceNow subscription product; Tier-1 publisher packs (Microsoft, Oracle, IBM, SAP…) are included/activated per contract. Activated via plugin on the instance.</p></div>
-  <div class="card"><span class="ico">🔐</span><b>Roles</b><p><code>sam_admin</code>: full config (metrics, rules, connections). <code>sam_user</code>: run and read. Keep entitlement edit rights tight; ELP credibility depends on it.</p></div>
+  <div class="card"><span class="ico">🔐</span><b>Roles</b><p><code>sam_admin</code>: full config <b>and runs reconciliation</b> (metrics, rules, connections, reclamation, entitlement import). <code>sam_user</code>: day-to-day features + read, <b>but cannot run reconciliation</b>. Keep entitlement edit rights tight; ELP credibility depends on it.</p></div>
   <div class="card"><span class="ico">🧪</span><b>Practice access</b><p>Personal Developer Instances don't include SAM Pro by default. Practice via SAM Foundations on a PDI, Now Learning labs/simulators, or a partner demo instance.</p></div>
   <div class="card"><span class="ico">🎓</span><b>Certification path</b><p>ServiceNow <b>CIS-SAM</b> (Certified Implementation Specialist – Software Asset Management) plus CSA (platform admin) is the consultant's standard combo.</p></div>
 </div>
@@ -930,7 +941,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <div class="ar">→</div>
   <div class="st"><span class="ico">📦</span><b>Software Model</b><span>The licensable product you manage<br><code>cmdb_software_product_model</code></span></div>
   <div class="ar">←</div>
-  <div class="st"><span class="ico">🧾</span><b>Entitlement</b><span>Purchased rights + metric<br><code>samp_sw_entitlement</code></span></div>
+  <div class="st"><span class="ico">🧾</span><b>Entitlement</b><span>Purchased rights + metric<br><code>alm_license</code></span></div>
 </div>
 <div class="co story"><div class="i">📖</div><div class="b"><b>Analogy: passport control</b>
 <p>An <b>installation</b> is a traveler. The <b>discovery model</b> is the raw passport scan (name spelled ten different ways). <b>Normalization</b> matches the scan to one canonical identity. The <b>software model</b> is that identity in your system. The <b>entitlement</b> is the visa saying how many travelers may enter and under what conditions. <b>Reconciliation</b> is the border officer comparing both queues.</p></div></div>
@@ -943,7 +954,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><code>cmdb_sam_sw_install</code></td><td>Every discovered installation (one row per install per device)</td><td>Discovery, SCCM, Intune…</td></tr>
 <tr><td><code>cmdb_sam_sw_discovery_model</code></td><td>Unique raw software signatures + normalization status</td><td>Auto-created from installs</td></tr>
 <tr><td><code>cmdb_software_product_model</code></td><td>Software models: the products you license</td><td>You / content library</td></tr>
-<tr><td><code>samp_sw_entitlement</code></td><td>Entitlements: counts, metric, license type, dates, cost</td><td>You / imports (MLS, PPA…)</td></tr>
+<tr><td><code>alm_license</code></td><td>Software Entitlements: counts, metric, license type, dates, cost (linked to <code>ast_contract</code>)</td><td>You / imports (MLS, PPA…)</td></tr>
 <tr><td>Reconciliation results</td><td>Per software model: rights owned, rights used, position, true-up cost</td><td>Reconciliation engine</td></tr>
 <tr><td>Subscriptions / SaaS licenses</td><td>Per-user assignments &amp; activity for SaaS products</td><td>Direct + SSO connectors</td></tr>
 </tbody>
@@ -1120,7 +1131,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p4-import">4.4 Walkthrough 3: load entitlements at scale</h3>
 <div class="cards">
-  <div class="card"><span class="ico">📥</span><b>Import sets</b><p>Spreadsheet → staging table → transform map → <code>samp_sw_entitlement</code>. The generic path for any purchase history.</p></div>
+  <div class="card"><span class="ico">📥</span><b>Import sets</b><p>Spreadsheet → staging table → transform map → <code>alm_license</code> (Software Entitlement). The generic path for any purchase history.</p></div>
   <div class="card"><span class="ico">🟦</span><b>Microsoft MLS import</b><p>Publisher pack parses the Microsoft License Statement into entitlements automatically. Covers volume licensing history.</p></div>
   <div class="card"><span class="ico">🔵</span><b>IBM PPA import</b><p>Passport Advantage entitlement report in, PVU entitlements out.</p></div>
   <div class="card"><span class="ico">🧾</span><b>Reseller / LSP reports</b><p>SHI, Insight, SoftwareOne exports beat digging through PO archives for the last 5 years.</p></div>
@@ -1179,7 +1190,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <h3 id="p4-lab">4.9 Build your own practice lab</h3>
 <div class="cards">
   <div class="card"><span class="ico">🧪</span><b>PDI + Foundations</b><p>Free Personal Developer Instance at developer.servicenow.com. SAM Foundations lets you practice models/entitlements; Pro engines need a licensed/demo instance.</p></div>
-  <div class="card"><span class="ico">🎓</span><b>Now Learning</b><p>Official SAM Pro courses, labs and the CIS-SAM path with simulator exams.</p></div>
+  <div class="card"><span class="ico">🎓</span><b>ServiceNow University</b><p>Official SAM Pro courses, labs and the CIS-SAM path with simulator exams (Now Learning was rebranded ServiceNow University at Knowledge 2025; <code>learning.servicenow.com</code>).</p></div>
   <div class="card"><span class="ico">🏢</span><b>Partner demo instances</b><p>Consultancies hold demo/POV instances with SAM Pro + demo data. Ask for one on day 1 of any SAM practice role.</p></div>
   <div class="card"><span class="ico">📝</span><b>Spreadsheet drills</b><p>Licensing math (Parts 5–7) needs no instance. Practice core/PVU/NUP calculations until they are reflexes; that is what interviews actually test.</p></div>
 </div>
@@ -1201,7 +1212,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <div class="pipeline">
   <div class="st"><span class="ico">📦</span><b>1 · Collect raw inventory</b><span>SCCM/Intune exports, ILMT reports, scripts, admin consoles</span></div>
   <div class="ar">→</div>
-  <div class="st"><span class="ico">🖥️</span><b>2 · Collect hardware</b><span>RVTools export for VMware, physical server list with cores/sockets</span></div>
+  <div class="st"><span class="ico">🖥️</span><b>2 · Collect hardware</b><span>RVTools export for VMware, physical server list with cores/sockets. ⚠️ Download RVTools only from the official Dell/robware source — trojanized installers circulated in 2025.</span></div>
   <div class="ar">→</div>
   <div class="st"><span class="ico">🧾</span><b>3 · Collect entitlements</b><span>MLS, PPA, contracts, reseller &amp; PO history</span></div>
   <div class="ar">→</div>
@@ -1537,7 +1548,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 </table></div>
 <h4>EA price levels &amp; the negotiation calendar</h4>
 <div class="cards">
-  <div class="card"><span class="ico">🏷️</span><b>Price levels A–D</b><p>EA discounts step with size: A (500–2,399), B (2,400–5,999), C (6,000–14,999), D (15,000+ users/devices). Crossing a band at renewal is a negotiation event.</p></div>
+  <div class="card"><span class="ico">🏷️</span><b>Price levels A–D</b><p>EA discounts step with size: A (500–2,399), B (2,400–5,999), C (6,000–14,999), D (15,000+). <b>Update:</b> from Nov 2025 Microsoft eliminated the programmatic B/C/D discounts for online services (all bands pay Level A/list), and sub-2,400-seat EAs no longer renew — steered to MCA-E/CSP.</p></div>
   <div class="card"><span class="ico">📅</span><b>Microsoft's clock</b><p>Fiscal year ends June 30; quarters end Sep/Dec/Mar/Jun. Concessions cluster at Microsoft's year-end (April–June), not yours.</p></div>
   <div class="card"><span class="ico">🧾</span><b>True-up mechanics</b><p>Count growth (users, devices, server deployments) annually; order via the LSP within the window before the enrollment anniversary. Reductions wait for renewal (EA) unless you are on EAS/online-services terms that allow it.</p></div>
   <div class="card"><span class="ico">🔁</span><b>The migration wave</b><p>Sub-2,400-seat EAs are being steered to MCA-E/CSP. As a consultant, model both before renewal: EA discounts vs NCE flexibility; the answer differs per customer.</p></div>
@@ -1564,7 +1575,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <div class="op">=</div>
   <div class="box"><b>20 core licenses</b><span>10 × 2-core packs</span></div>
   <div class="op">≈</div>
-  <div class="box res"><b>~$1,340</b><span>at ~$1,069 per 16 cores list</span></div>
+  <div class="box res"><b>~$1,470</b><span>at ~$1,176 per 16 cores list (WS2025)</span></div>
 </div>
 <p class="small">Plus a CAL for every user or device that touches it. SAM Pro setup: software model "Windows Server 2022 Standard", metric Per Core, entitlement quantity in cores.</p>
 
@@ -1821,8 +1832,9 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <ul>
   <li>Oracle mines <b>download logs</b> (especially security patches) to open "friendly" license discussions. Treat any Oracle Java outreach as pre-audit.</li>
   <li>Defense: inventory all JDKs/JREs (SAM Pro discovery finds them), replace Oracle JDK with <b>OpenJDK builds</b> (Temurin, Corretto, Zulu) where support terms allow, and document the migration date.</li>
+<li><b>Not all Oracle JDK is paid:</b> under the <b>NFTC</b> license, Oracle JDK is free for production during each version's window (17 to Sep 2024, 21 to ~Sep 2026, 25 current). The subscription bites for Java 8/11 updates and for any version's updates <i>after</i> its NFTC window closes — so the exposure is patch access, not the download itself.</li>
 </ul>
-<h4>Authorized cloud counting (AWS / Azure)</h4>
+<h4>Authorized cloud counting (AWS / Azure / Google Cloud)</h4>
 <div class="calc ora">
   <div class="box"><b>16 vCPUs</b><span>EE on EC2/Azure VM (hyper-threading on)</span></div>
   <div class="op">÷</div>
@@ -1849,7 +1861,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <div class="card"><span class="ico">🔍</span><b>Credentialed DB discovery</b><p>Via MID Server, queries each database for edition, options and feature usage (<code>V$OPTION</code>, feature usage stats), plus host/cluster topology for processor math.</p></div>
   <div class="card"><span class="ico">🧮</span><b>Metric calculators</b><p>Processor with core factors, NUP with minimums, SE2 socket rules, option stacking, virtualization awareness from vCenter data.</p></div>
   <div class="card"><span class="ico">🗺️</span><b>Optimization views</b><p>Options used-but-unlicensed and licensed-but-unused, consolidation candidates, isolation planning inputs.</p></div>
-  <div class="card"><span class="ico">⚠️</span><b>Honest caveat</b><p>Oracle only accepts audit data from its own scripts and a short list of verified third-party tools. Treat SAM Pro as your <b>internal truth and early-warning system</b>; expect Oracle scripts in a formal audit and verify the current verified-tool list.</p></div>
+  <div class="card"><span class="ico">⚠️</span><b>Honest caveat</b><p>Oracle accepts audit data from its own scripts and a short list of verified tools — and <b>ServiceNow has been an Oracle-verified tool since June 2022</b> (Database, DB Options, Fusion Middleware; not Java per-employee). Treat SAM Pro as your <b>internal truth and early-warning system</b>, now also submittable for verified products; expect Oracle scripts in a formal audit and verify the current verified-tool list.</p></div>
 </div>
 
 <h3 id="p6-buy">6.10 Buying Oracle: contracts &amp; agreements in depth</h3>
@@ -2026,8 +2038,10 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <thead><tr><th scope="col">Processor family</th><th scope="col">PVU per core (illustrative)</th></tr></thead>
 <tbody>
 <tr><td>Intel Xeon, ≤ 2 sockets</td><td class="c"><b>70</b></td></tr>
-<tr><td>Intel Xeon, 4+ sockets / high-end</td><td class="c">100</td></tr>
-<tr><td>IBM POWER</td><td class="c">100–120</td></tr>
+<tr><td>Intel Xeon, 4 sockets</td><td class="c">100</td></tr>
+<tr><td>Intel Xeon, &gt; 4 sockets</td><td class="c">120</td></tr>
+<tr><td>IBM POWER (scale-out / midrange / enterprise)</td><td class="c">70 / 100 / 120</td></tr>
+<tr><td>Any core running Linux (IFL / POWER-IFL)</td><td class="c">70</td></tr>
 </tbody>
 </table></div>
 <p class="small mut">Always confirm against IBM's current PVU table per chip model; these values are for intuition and interview math.</p>
@@ -2052,7 +2066,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <li><b class="t">Two-year retention</b><div class="d">Keep the reports (and the tool healthy) as audit evidence for 2 years.</div></li>
 </ol>
 <div class="co tip"><div class="i">💡</div><div class="b"><b>Small-company exemption</b>
-<p>Enterprises with fewer than 1,000 employees + contractors may self-report manually instead of running ILMT (conditions apply, e.g. not an outsourcer). Everyone else: no tool, no discount.</p></div></div>
+<p><b>Withdrawn (IPAA v11, 2023).</b> The old manual-reporting exception (roughly &lt;1,000 PVUs total capacity, not a Service Provider) is no longer accepted for new cases — ILMT/approved tooling is now mandatory for all sub-capacity (PVU, RVU, and VPC). Only pre-existing manual reporters are grandfathered.</p></div></div>
 
 <h3 id="p7-ilmt">7.3 ILMT and its accepted alternatives</h3>
 <div class="cards w">
@@ -2300,7 +2314,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tbody>
 <tr><td><b>AWLC</b> (Advanced Workload LC)</td><td>The mainstream tiered per-MSU curve on modern boxes; price per MSU falls as MSUs rise</td></tr>
 <tr><td><b>WLC / EWLC / zELC / PSLC</b></td><td>Older / entry / machine-specific / sysplex-aggregated variants of the same idea</td></tr>
-<tr><td><b>CMP</b> (Country Multiplex Pricing)</td><td>All machines in a country priced as one big pool: better tiers, easier workload moves</td></tr>
+<tr><td><b>CMP</b> (Country Multiplex Pricing)</td><td>All machines in a country priced as one pool. <b>Withdrawn for new contracts Jan 2021</b> (replaced by TFP); legacy contracts only</td></tr>
 <tr><td><b>TFP</b> (Tailored Fit Pricing, 2019+)</td><td>Cloud-style contracts: pay for MSUs actually consumed per year (or flat full-capacity), no more R4HA gaming</td></tr>
 <tr><td><b>zNALC</b></td><td>Legacy discounted z/OS for qualified new applications; superseded in spirit by TFP offers</td></tr>
 </tbody>
@@ -2652,7 +2666,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>Bank B · ServiceNow platform &amp; SAM Pro (20)</h4>
 <details class="qa"><summary>SAM Foundations vs SAM Professional?<span class="lv basic">BASIC</span></summary><div class="a"><p>Foundations = manual tracking: models, entitlements, basic allocations. Pro adds the automation that makes SAM real: content-library normalization, the reconciliation engine, publisher packs, usage-based reclamation, SaaS management and cloud insights. Foundations records; Pro calculates.</p></div></details>
-<details class="qa"><summary>Walk me through the data flow from a discovered install to the ELP.<span class="lv mid">MID</span></summary><div class="a"><p>Install lands in <code>cmdb_sam_sw_install</code> (via Discovery/SCCM/etc. through the MID Server) → its unique signature becomes a discovery model (<code>cmdb_sam_sw_discovery_model</code>) → normalization matches it to canonical publisher/product/version and maps to a software model (<code>cmdb_software_product_model</code>) → entitlements (<code>samp_sw_entitlement</code>) attach rights and a metric to that model → reconciliation applies metric math plus use rights → reconciliation result = the position.</p></div></details>
+<details class="qa"><summary>Walk me through the data flow from a discovered install to the ELP.<span class="lv mid">MID</span></summary><div class="a"><p>Install lands in <code>cmdb_sam_sw_install</code> (via Discovery/SCCM/etc. through the MID Server) → its unique signature becomes a discovery model (<code>cmdb_sam_sw_discovery_model</code>) → normalization matches it to canonical publisher/product/version and maps to a software model (<code>cmdb_software_product_model</code>) → entitlements (<code>alm_license</code>, the Software Entitlement table) attach rights and a metric to that model → reconciliation applies metric math plus use rights → reconciliation result = the position.</p></div></details>
 <details class="qa"><summary>Discovery model vs software model?<span class="lv basic">BASIC</span></summary><div class="a"><p>Discovery model: a unique raw software signature as seen by inventory ("MS SQL Svr 2019 Ent x64"), with a normalization status. Software model: the clean, licensable product record you manage entitlements against. Many discovery models map into one software model.</p></div></details>
 <details class="qa"><summary>How does normalization work in SAM Pro?<span class="lv mid">MID</span></summary><div class="a"><p>Discovery models are matched against the ServiceNow Content Library (a curated catalog synced to the instance) on publisher/product/version/edition. Outcomes: fully normalized, partially, publisher-only, manually normalized via custom rules, or new/unrecognized. Reconciliation only trusts recognized software, so coverage (target &gt;85–90%) is the gating KPI.</p></div></details>
 <details class="qa"><summary>Normalization sits at 62%. What is the impact and your plan?<span class="lv mid">MID</span></summary><div class="a"><p>Impact: over a third of the estate is invisible to reconciliation, so any compliance dashboard is fiction. Plan: sort un-normalized discovery models by install count, manually map the top offenders (usually inhouse-packaged or renamed installers), submit missing titles to the content service, verify the library sync job runs, and re-measure weekly until &gt;85–90%.</p></div></details>
@@ -2669,7 +2683,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <details class="qa"><summary>Why does SAM Pro need hardware and vCenter data, specifically?<span class="lv mid">MID</span></summary><div class="a"><p>Infrastructure metrics are hardware math: physical cores and sockets for Microsoft core licensing and Oracle processor calculations, cluster/host membership for mobility and soft-partitioning exposure, vCPU counts for IBM sub-capacity caps and cloud counting. Missing attributes silently break the calculators, so CI completeness is part of SAM QA.</p></div></details>
 <details class="qa"><summary>What do publisher packs actually add?<span class="lv basic">BASIC</span></summary><div class="a"><p>Curated content and machinery per vendor: product definitions and suite logic, vendor-specific metrics and calculators (core minimums, core factors, PVU, sub-capacity), import tools (Microsoft MLS, IBM Passport Advantage), integrations (M365, ILMT, Oracle DB discovery) and dashboards. They encode the licensing rules so you configure data, not formulas.</p></div></details>
 <details class="qa"><summary>How would you position SAM Pro against Flexera or Snow?<span class="lv mid">MID</span></summary><div class="a"><p>Point tools bring long-built inventory depth and publisher content; SAM Pro brings platform gravity: native CMDB, catalog/request workflows, ITSM integration and one data model, and it happily consumes third-party inventory anyway. If ServiceNow is already the backbone, SAM Pro usually wins on operationalization and TCO. I stay respectful of both; migrations between them are common consulting work.</p></div></details>
-<details class="qa"><summary>What roles and access govern SAM Pro?<span class="lv basic">BASIC</span></summary><div class="a"><p><code>sam_admin</code> for configuration (metrics, rules, connections, content) and <code>sam_user</code> for operating and reading. Practical governance: restrict entitlement editing tightly and audit changes, because ELP credibility dies if purchase records are casually editable.</p></div></details>
+<details class="qa"><summary>What roles and access govern SAM Pro?<span class="lv basic">BASIC</span></summary><div class="a"><p><code>sam_admin</code> for configuration <b>and running reconciliation</b> (metrics, rules, connections, content, reclamation, entitlement import); <code>sam_user</code> for day-to-day features and reading results (cannot run reconciliation). Practical governance: restrict entitlement editing tightly and audit changes, because ELP credibility dies if purchase records are casually editable.</p></div></details>
 <details class="qa"><summary>A product's position looks obviously wrong. Debug it.<span class="lv adv">ADV</span></summary><div class="a"><p>In order: is the discovery model normalized and mapped to the right software model? Are installs deduplicated across sources? Does the entitlement carry the right metric, quantity, dates and SA/S&amp;S flags? Are hardware/cluster attributes present on the CIs? Then open License Workbench and trace the allocation. Fix data, re-run reconciliation, never hand-edit results. Ninety percent of engine bugs are data bugs.</p></div></details>
 
 <h4>Bank C · Process &amp; operations (15)</h4>
@@ -2777,7 +2791,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <details class="qa"><summary>Tell me about a SAM mistake you made and what changed.<span class="lv mid">MID</span></summary><div class="a"><p>Pattern for a strong answer: a specific early error (trusting a dashboard without checking normalization; quoting an ELP with a stale data cut), the concrete consequence (procurement negotiated on wrong numbers), the fix (coverage gates and freshness stamps on every report), and the habit that persists today. Interviewers are testing for data humility; give them evidence you have it.</p></div></details>
 
 <h4>Bank I · Rapid fire (8): answer in one breath</h4>
-<details class="qa"><summary>Plugin that activates SAM Pro?<span class="lv basic">BASIC</span></summary><div class="a"><p><code>com.sn_samp</code> (Software Asset Management Professional); publisher packs activate alongside it. Verify naming in your release.</p></div></details>
+<details class="qa"><summary>Plugin that activates SAM Pro?<span class="lv basic">BASIC</span></summary><div class="a"><p>Core plugin is <code>com.snc.samp</code> (Software Asset Management Professional). <code>com.sn_samp_master</code> is the master plugin that installs the core plus all publisher packs. Verify naming in your release.</p></div></details>
 <details class="qa"><summary>Normalization coverage target before trusting reconciliation?<span class="lv basic">BASIC</span></summary><div class="a"><p>Above 85–90% of installs normalized; below that, positions describe a fraction of reality.</p></div></details>
 <details class="qa"><summary>Windows Server licenses for a 1-CPU, 4-core box?<span class="lv basic">BASIC</span></summary><div class="a"><p>16 core licenses: the per-server floor beats the physical count.</p></div></details>
 <details class="qa"><summary>Oracle EE on an 8-core x86 server = how many processors?<span class="lv basic">BASIC</span></summary><div class="a"><p>8 × 0.5 = 4 Processor licenses (and 4 of every used option).</p></div></details>
@@ -2829,7 +2843,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><span class="pill ora">Oracle EE (Processor)</span></td><td><code>CEILING(cores × core factor)</code></td><td>x86 = 0.5, POWER = 1.0; every used option counts the same</td></tr>
 <tr><td><span class="pill ora">Oracle EE (NUP)</span></td><td><code>MAX(all users+devices, 25 × processors)</code></td><td>Multiplexing counts front-end humans</td></tr>
 <tr><td><span class="pill ora">Oracle SE2</span></td><td>Per occupied socket</td><td>Max 2 sockets, 16 threads, min 10 NUP/server</td></tr>
-<tr><td><span class="pill ora">Oracle in AWS/Azure</span></td><td><code>vCPU ÷ 2</code> = processors (HT on)</td><td>No core factor in authorized clouds</td></tr>
+<tr><td><span class="pill ora">Oracle in AWS/Azure/GCP</span></td><td><code>vCPU ÷ 2</code> = processors (HT on)</td><td>No core factor; GCP added to authorized clouds Jun 2024</td></tr>
 <tr><td><span class="pill ora">Java SE Universal</span></td><td><code>ALL employees+contractors × tier price</code></td><td>~$15 → ~$5.25/emp/mo list tiers; deployment count irrelevant</td></tr>
 <tr><td><span class="pill ibm">IBM PVU sub-capacity</span></td><td><code>Σ MIN(VM vCPU, host cores) × PVU rate</code></td><td>Needs ILMT/accepted tool ≤90 days, quarterly reports, 2-yr retention</td></tr>
 <tr><td><span class="pill ibm">IBM PVU full capacity</span></td><td><code>all host cores × PVU rate</code></td><td>The default when evidence is missing</td></tr>
@@ -2852,7 +2866,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td class="c"><b>2 vCPU = 1 proc</b></td><td>Authorized-cloud counting (no core factor)</td><td><span class="pill ora">ORA</span></td></tr>
 <tr><td class="c"><b>22%</b></td><td>Annual support on net license fees</td><td><span class="pill ora">ORA</span></td></tr>
 <tr><td class="c"><b>$15 → $5.25</b></td><td>Java per-employee monthly list tiers</td><td><span class="pill ora">ORA</span></td></tr>
-<tr><td class="c"><b>70 / 100–120</b></td><td>PVU per core: 2-socket x86 / bigger &amp; Power boxes</td><td><span class="pill ibm">IBM</span></td></tr>
+<tr><td class="c"><b>70 / 100 / 120</b></td><td>PVU per core by sockets: ≤2 / 4 / &gt;4 (x86 &amp; POWER tier the same; Linux/IFL = 70)</td><td><span class="pill ibm">IBM</span></td></tr>
 <tr><td class="c"><b>90 days · quarterly · 2 yrs</b></td><td>Sub-capacity evidence: tool deadline · reports · retention</td><td><span class="pill ibm">IBM</span></td></tr>
 <tr><td class="c"><b>&lt;1,000</b></td><td>Employee threshold for manual sub-cap reporting exemption</td><td><span class="pill ibm">IBM</span></td></tr>
 <tr><td class="c"><b>85–90% / 95%</b></td><td>Normalization gate / discovery coverage target</td><td><span class="pill">SAM Pro</span></td></tr>
@@ -2877,7 +2891,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <p>Eight more publishers you will meet. One model, one trap, one move each:</p>
 <div class="cards w">
   <div class="card"><span class="ico">🟨</span><b>SAP</b><p><b>Model:</b> named-user classes (Professional, Limited…) + engine/package metrics (orders, revenue, cores) + annual LAW/USMM self-measurement. <b>Trap:</b> <i>Digital Access</i>: third-party systems creating SAP documents. <b>Move:</b> classify users by actual activity before the yearly measurement; model Digital Access both ways (document licenses vs legacy named-user claims).</p></div>
-  <div class="card"><span class="ico">🟩</span><b>VMware by Broadcom</b><p><b>Model:</b> subscription only, per core, bundled into VCF (full stack) or VVF; minimums of 16 cores per CPU and 72 cores per order. <b>Trap:</b> renewal shock, 3–10× legacy pricing. <b>Move:</b> per-cluster edition mapping (don't buy VCF where VVF suffices), inventory cores precisely, negotiate hard (25–40% off openers is common), and price the exit alternatives.</p></div>
+  <div class="card"><span class="ico">🟩</span><b>VMware by Broadcom</b><p><b>Model:</b> subscription only, per core, bundled into VCF (full stack) or VVF; <b>16-core minimum per physical CPU</b> (the briefly-announced 72-core-per-order minimum was withdrawn in Apr 2025). <b>Trap:</b> renewal shock, 3–10× legacy pricing, plus a <b>20% surcharge on late renewals</b>, applied retroactively. <b>Move:</b> per-cluster edition mapping (don't buy VCF where VVF suffices), inventory cores precisely, negotiate hard (25–40% off openers is common), and price the exit alternatives.</p></div>
   <div class="card"><span class="ico">🔴</span><b>Adobe</b><p><b>Model:</b> named-user Creative Cloud/Acrobat via VIP (transactional) or ETLA (3-yr enterprise). <b>Trap:</b> shared logins breaking named-user terms; Sign/Stock consumption overages. <b>Move:</b> SSO-based activity reclamation, 60-day idle rule; true-down at ETLA anniversary.</p></div>
   <div class="card"><span class="ico">🟦</span><b>Citrix</b><p><b>Model:</b> per-user/per-device universal subscriptions (legacy concurrent still around). <b>Trap:</b> concurrent-to-user migrations misconverted. <b>Move:</b> meter real concurrency before renewal; hybrid entitlements need one counting rule, written down.</p></div>
   <div class="card"><span class="ico">☁️</span><b>Salesforce</b><p><b>Model:</b> edition per user + add-on sprawl (API calls, sandboxes, Data/Einstein). <b>Trap:</b> integration users consuming full licenses; unused full-copy sandboxes. <b>Move:</b> license-type right-sizing (platform vs full CRM), API-user consolidation, sandbox pruning at renewal.</p></div>
@@ -2935,7 +2949,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <dt>License metric</dt><dd>The unit a publisher counts: user, device, core, processor, PVU, NUP, employee…</dd>
 <dt>License Mobility</dt><dd>SA benefit allowing server licenses to move across hosts/farms/clouds.</dd>
 <dt>License Workbench</dt><dd>SAM Pro's validation surface showing how entitlements were allocated to consumption.</dd>
-<dt>CMP</dt><dd>Country Multiplex Pricing: all IBM Z machines in a country priced as one pool.</dd>
+<dt>CMP</dt><dd>Country Multiplex Pricing: all IBM Z machines in a country priced as one pool. Withdrawn for new contracts in 2021, superseded by Tailored Fit Pricing; survives only on legacy contracts.</dd>
 <dt>Digital Access (SAP)</dt><dd>Licensing third-party-created SAP documents per document instead of indirect named users.</dd>
 <dt>IFL</dt><dd>Linux-only mainframe engine; excluded from z/OS MLC charges, ILMT rules apply on top.</dd>
 <dt>LPAR</dt><dd>Logical partition of a mainframe: the "VM" of IBM Z, unit of MLC measurement.</dd>
@@ -2975,7 +2989,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p11-res">11.7 Where to go deeper (and keep current)</h3>
 <div class="cards w">
-  <div class="card"><span class="ico">🎓</span><b>ServiceNow official</b><p>Now Learning SAM courses and labs · CIS-SAM certification path · product documentation and release notes for your instance's version · ServiceNow Community SAM forum.</p></div>
+  <div class="card"><span class="ico">🎓</span><b>ServiceNow official</b><p>ServiceNow University (formerly Now Learning) SAM courses and labs · CIS-SAM certification path · product documentation and release notes for your instance's version · ServiceNow Community SAM forum.</p></div>
   <div class="card"><span class="ico">📜</span><b>Publisher primary sources</b><p>Microsoft Product Terms site · Oracle core factor table, partitioning policy and cloud policy PDFs · IBM PVU tables, sub-capacity terms and Passport Advantage docs. Primary sources beat blog posts in any dispute.</p></div>
   <div class="card"><span class="ico">🧑‍🤝‍🧑</span><b>Profession</b><p>ITAM Review / ITAM Forum for news and benchmarks · IAITAM (CSAM/CITAM certs) · publisher-licensing specialists' blogs for audit war stories.</p></div>
   <div class="card"><span class="ico">⚠️</span><b>Currency disclaimer</b><p>Licensing rules, prices and program names change constantly. Figures here (prices, PVU rates, thresholds) are illustrative for learning and interviews; verify against current vendor terms before advising a client.</p></div>
