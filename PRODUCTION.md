@@ -1,8 +1,14 @@
 # Production Status — SAM Pro Zero-to-Mastery Guide
 
 Tier: A-static (confirmed 2026-07-18 — public free content site, no accounts/payments/user data; human answered scope batch)
-Current phase: 1 — Correctness net (CI)
-Next task: CI workflow with HTML validation + anchor/dup-ID checks; prove red→green gate
+Current phase: content research (background) + phases 2/6/7 in-file work
+Next task: integrate research corrections; self-host fonts; meta/OG; heading order; mobile TOC; deploy script
+
+## Gate evidence
+- Phase 1 (2026-07-18): CI = html-validate@11.5.6 + check.py (dup ids, anchor targets, node --check JS).
+  Broken-anchor branch `ci-gate-proof` → run 29654623054 **failure**; main → run 29654622459 **success**. Branch deleted after proof.
+  Local: `python3 check.py` → "OK: 113 ids unique, 12 internal anchors resolve, JS parses"; `npx html-validate@11.5.6 index.html` → clean (config: recommended preset, no-inline-style off — deliberate single-file design).
+- Phase 1 bonus: table markup surgery (39 tables → thead/tbody + th scope) fixed Lighthouse td-has-header + wcag/h63 and activated previously-dead `tbody tr:hover` CSS. Visually verified in browser before push.
 
 ## Inventory
 - **App:** single-file static HTML learning guide (`index.html`, 3,003 lines, 339KB raw / 105KB gzipped). Inline CSS + vanilla JS. No build step, no framework, no JS deps.
