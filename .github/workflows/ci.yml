@@ -1,0 +1,11 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: HTML validation
+        run: npx --yes html-validate@11.5.6 index.html
+      - name: Structural checks (ids, anchors, JS syntax)
+        run: python3 check.py

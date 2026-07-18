@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -274,12 +274,13 @@ h4{font-size:1.02rem;margin:26px 0 10px;font-weight:700}
 /* ============ TABLES ============ */
 .scroll{overflow-x:auto;margin:18px 0;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--panel-solid)}
 table{border-collapse:collapse;width:100%;font-size:.89rem}
-th{
+thead th{
   background:var(--panel2);text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);
   font-family:var(--font-d);font-weight:700;
 }
+tbody th[scope="row"]{background:none;text-align:left;font-weight:700;color:var(--ink)}
 th,td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-tr:last-child td{border-bottom:none}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:none}
 tbody tr{transition:background .15s}
 tbody tr:hover{background:var(--panel2)}
 td.y{color:var(--good);font-weight:800;text-align:center} td.n{color:var(--bad);font-weight:800;text-align:center}
@@ -527,7 +528,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
     <li><a href="#p10" data-part="p10"><span class="n">10</span> Interview strategy + 120 Q&amp;A <span class="done-mark" hidden>✓</span></a></li>
     <li><a href="#p11" data-part="p11"><span class="n">11</span> Cheat sheets, glossary, 90-day plan <span class="done-mark" hidden>✓</span></a></li>
   </ol>
-  <button class="theme" id="themeBtn">◐ Toggle theme</button>
+  <button type="button" class="theme" id="themeBtn">◐ Toggle theme</button>
 </nav>
 
 <main>
@@ -613,7 +614,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p1-vocab">1.3 Vocabulary that interviewers test on day one</h3>
 <div class="scroll"><table>
-<tr><th>Term</th><th>Plain meaning</th><th>Example</th></tr>
+<thead><tr><th scope="col">Term</th><th scope="col">Plain meaning</th><th scope="col">Example</th></tr></thead>
+<tbody>
 <tr><td><b>License</b></td><td>The legal right to use software under conditions</td><td>Right to run SQL Server on 8 cores</td></tr>
 <tr><td><b>Entitlement</b></td><td>The purchase record proving how many rights you own</td><td>PO #4711: 50 × Visio Professional, perpetual</td></tr>
 <tr><td><b>License metric</b></td><td>The unit the publisher counts in</td><td>Per user, per device, per core, PVU, NUP</td></tr>
@@ -624,6 +626,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><b>True-up</b></td><td>Periodic payment to cover growth since last count</td><td>Annual Microsoft EA true-up order</td></tr>
 <tr><td><b>Shelfware</b></td><td>Licenses bought but never deployed</td><td>300 Project licenses, 90 installed</td></tr>
 <tr><td><b>Reclamation / reharvesting</b></td><td>Taking unused licenses back into the pool</td><td>Uninstall Visio idle &gt; 90 days, reuse the license</td></tr>
+</tbody>
 </table></div>
 
 <h3 id="p1-lifecycle">1.4 The software asset lifecycle</h3>
@@ -644,12 +647,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p1-maturity">1.5 SAM maturity ladder (know where a client sits)</h3>
 <div class="scroll"><table>
-<tr><th class="c">Level</th><th>Name</th><th>What it looks like</th><th>Consultant's move</th></tr>
+<thead><tr><th scope="col" class="c">Level</th><th scope="col">Name</th><th scope="col">What it looks like</th><th scope="col">Consultant's move</th></tr></thead>
+<tbody>
 <tr><td class="c">0</td><td><b>Chaotic</b></td><td>No inventory. Licenses in email attachments and drawers.</td><td>Run discovery, gather entitlements, quick baseline</td></tr>
 <tr><td class="c">1</td><td><b>Reactive</b></td><td>Spreadsheets exist; panic starts when the audit letter arrives</td><td>Stand up SAM Pro, one publisher first</td></tr>
 <tr><td class="c">2</td><td><b>Trackable</b></td><td>Tool deployed, inventory trustworthy, entitlements loaded</td><td>Automate reconciliation, fix normalization</td></tr>
 <tr><td class="c">3</td><td><b>Proactive</b></td><td>Continuous ELP, reclamation running, renewals data-driven</td><td>Optimization rules, request-workflow integration</td></tr>
 <tr><td class="c">4</td><td><b>Strategic</b></td><td>SAM feeds architecture, cloud and M&amp;A decisions</td><td>What-if simulations, portfolio rationalization</td></tr>
+</tbody>
 </table></div>
 <div class="co mic"><div class="i">🎤</div><div class="b"><b>Interview lens</b>
 <p>"How would you start a SAM program?" Strong answer: <b>assess maturity first</b>, then sequence: (1) trustworthy discovery, (2) entitlement collection, (3) normalization, (4) one Tier-1 publisher ELP end-to-end, (5) operationalize (reclamation, renewals, request workflow). Saying "install the tool" first is the classic junior mistake: the tool amplifies data, and bad data amplified is bad SAM.</p></div></div>
@@ -657,7 +662,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <h3 id="p1-metrics">1.6 License metrics: the units publishers count in</h3>
 <p>Metrics are where licensing gets hard. Same software, different metric, wildly different cost:</p>
 <div class="scroll"><table>
-<tr><th>Metric</th><th>Counts what?</th><th>Typical publisher use</th><th>Watch out for</th></tr>
+<thead><tr><th scope="col">Metric</th><th scope="col">Counts what?</th><th scope="col">Typical publisher use</th><th scope="col">Watch out for</th></tr></thead>
+<tbody>
 <tr><td><b>Per User</b></td><td>Named human beings</td><td>M365 E3/E5, Salesforce</td><td>Leavers never off-boarded keep consuming</td></tr>
 <tr><td><b>Per Device</b></td><td>Machines with the install</td><td>Office (device CAL), desktop apps</td><td>VDI and shared PCs complicate counts</td></tr>
 <tr><td><b>Per Core</b></td><td>Physical/virtual CPU cores</td><td>Microsoft SQL/Windows Server</td><td>Minimum-core floors (16 per server, 4 per VM)</td></tr>
@@ -667,6 +673,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><b>Concurrent</b></td><td>Simultaneous users at peak</td><td>Engineering tools (older models)</td><td>Need peak metering, not install counts</td></tr>
 <tr><td><b>Per Employee</b></td><td>Every employee + contractor, used or not</td><td>Oracle Java SE Universal Subscription</td><td>Headcount drives cost, not deployment</td></tr>
 <tr><td><b>Subscription seat</b></td><td>Active assignment per term</td><td>SaaS (Zoom, Adobe CC)</td><td>Auto-renewal of inactive seats</td></tr>
+</tbody>
 </table></div>
 <div class="co tip"><div class="i">💡</div><div class="b"><b>Memory hook</b>
 <p>Desktop software counts <b>people or PCs</b>. Datacenter software counts <b>hardware power</b> (cores, processors, PVU). SaaS counts <b>seats over time</b>. Java broke the pattern by counting <b>everyone in the company</b>, which is why it became an audit weapon.</p></div></div>
@@ -680,13 +687,15 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 </div>
 <h4>Rights that change the math (the "effective" in ELP)</h4>
 <div class="scroll"><table>
-<tr><th>Right</th><th>Meaning</th><th>Classic example</th></tr>
+<thead><tr><th scope="col">Right</th><th scope="col">Meaning</th><th scope="col">Classic example</th></tr></thead>
+<tbody>
 <tr><td><b>Downgrade right</b></td><td>New license covers older versions</td><td>SQL 2022 license runs a SQL 2016 instance</td></tr>
 <tr><td><b>Upgrade right</b></td><td>Old license covers newer versions, usually only with active maintenance (SA/S&amp;S)</td><td>SQL 2019 + SA runs SQL 2022</td></tr>
 <tr><td><b>Suite right</b></td><td>One suite license covers member products</td><td>Office covers Word + Excel + PowerPoint installs</td></tr>
 <tr><td><b>Secondary use</b></td><td>Second install for same user allowed</td><td>Office on laptop + desktop</td></tr>
 <tr><td><b>License mobility</b></td><td>Move licenses across servers/clouds under conditions</td><td>SQL with SA into Azure/AWS</td></tr>
 <tr><td><b>Dual-use / passive failover</b></td><td>Standby server free under conditions</td><td>SQL passive HA replica free with SA</td></tr>
+</tbody>
 </table></div>
 
 <h4>Where licenses come from: the channel taxonomy</h4>
@@ -723,12 +732,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p1-audit">1.9 The audit landscape (why budgets exist for SAM)</h3>
 <div class="scroll"><table>
-<tr><th>Publisher</th><th>Audit style</th><th>Who runs it</th><th>Typical trigger</th></tr>
+<thead><tr><th scope="col">Publisher</th><th scope="col">Audit style</th><th scope="col">Who runs it</th><th scope="col">Typical trigger</th></tr></thead>
+<tbody>
 <tr><td><b>Microsoft</b></td><td>"SAM engagement" (soft) or formal LLC audit</td><td>Big-4 firms (KPMG, Deloitte, EY, PwC)</td><td>EA renewal, M&amp;A, declining spend, cloud resistance</td></tr>
 <tr><td><b>Oracle</b></td><td>Formal GLAS audit; script-based evidence</td><td>Oracle GLAS (formerly LMS) + partners</td><td>ULA expiry, support cancellation, hardware refresh, Java downloads</td></tr>
 <tr><td><b>IBM</b></td><td>Contractual audit; sub-capacity evidence review</td><td>KPMG / Deloitte on IBM's behalf</td><td>Missing ILMT reports, S&amp;S reduction, Passport Advantage anomalies</td></tr>
 <tr><td><b>SAP</b></td><td>Annual self-declaration (LAW/USMM) + audits</td><td>SAP GLAC</td><td>Indirect/digital access patterns</td></tr>
 <tr><td><b>Others</b></td><td>Adobe, Quest, Micro Focus/OpenText, Broadcom/VMware all audit actively</td><td>Vendor or third party</td><td>Model changes (e.g. VMware subscription shift)</td></tr>
+</tbody>
 </table></div>
 <div class="co trap"><div class="i">⚠️</div><div class="b"><b>Real-world trap</b>
 <p>Audit exposure is rarely about piracy. It is about <b>rule complexity</b>: a VMware cluster that lets an Oracle VM move to unlicensed hosts, an SA lapse that voids upgrade rights, an ILMT agent missing on 5% of the estate. Publishers monetize complexity; SAM's job is to out-know it.</p></div></div>
@@ -762,7 +773,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p2-crash">2.2 Platform crash course (the 10 concepts you need)</h3>
 <div class="scroll"><table>
-<tr><th>#</th><th>Concept</th><th>What it is</th><th>Why SAM cares</th></tr>
+<thead><tr><th scope="col">#</th><th scope="col">Concept</th><th scope="col">What it is</th><th scope="col">Why SAM cares</th></tr></thead>
+<tbody>
 <tr><td class="c">1</td><td><b>Instance</b></td><td>Your company's own ServiceNow environment (URL like <code>acme.service-now.com</code>)</td><td>Dev → Test → Prod instances; SAM config moves between them</td></tr>
 <tr><td class="c">2</td><td><b>Table</b></td><td>Everything is a table of records with fields (like database tables)</td><td>Installs, models, entitlements: all just tables you can query</td></tr>
 <tr><td class="c">3</td><td><b>Form &amp; list</b></td><td>Form = one record; list = many records with filters</td><td>Your daily UI; list filters answer most SAM questions</td></tr>
@@ -773,6 +785,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td class="c">8</td><td><b>Scheduled job</b></td><td>Automation that runs on a timer</td><td>Nightly reconciliation, content library sync, connector imports</td></tr>
 <tr><td class="c">9</td><td><b>Update set / app scope</b></td><td>Container for configuration changes moved dev → prod</td><td>Your custom metrics/rules travel in these</td></tr>
 <tr><td class="c">10</td><td><b>Workspace</b></td><td>Modern task-focused UI on top of the same tables</td><td><b>Software Asset Workspace</b> is SAM Pro's daily cockpit</td></tr>
+</tbody>
 </table></div>
 
 <h4>How data reaches a cloud instance: the MID Server bridge</h4>
@@ -795,7 +808,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p2-family">2.3 SAM Foundations vs SAM Pro vs the ITAM suite</h3>
 <div class="scroll"><table>
-<tr><th>Capability</th><th class="c">SAM Foundations<br><span class="small">(basic, bundled)</span></th><th class="c">SAM Professional<br><span class="small">(paid subscription)</span></th></tr>
+<thead><tr><th scope="col">Capability</th><th scope="col" class="c">SAM Foundations<br><span class="small">(basic, bundled)</span></th><th scope="col" class="c">SAM Professional<br><span class="small">(paid subscription)</span></th></tr></thead>
+<tbody>
 <tr><td>Track software models &amp; entitlements manually</td><td class="y">✓</td><td class="y">✓</td></tr>
 <tr><td>Automatic normalization via ServiceNow Content Library</td><td class="n">✗</td><td class="y">✓</td></tr>
 <tr><td>Automated reconciliation engine &amp; compliance dashboards</td><td class="n">✗</td><td class="y">✓</td></tr>
@@ -803,6 +817,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td>Usage-based reclamation workflows</td><td class="n">✗</td><td class="y">✓</td></tr>
 <tr><td>SaaS license management (direct + SSO connectors)</td><td class="n">✗</td><td class="y">✓</td></tr>
 <tr><td>Cloud/hybrid license insights &amp; what-if simulation</td><td class="n">✗</td><td class="y">✓</td></tr>
+</tbody>
 </table></div>
 <div class="cards">
   <div class="card"><span class="ico">🧮</span><b>SAM Pro</b><p>Software: licenses, compliance, optimization. The subject of this guide.</p></div>
@@ -904,7 +919,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>Tables cheat table (the ones worth quoting in interviews)</h4>
 <div class="scroll"><table>
-<tr><th>Table</th><th>Holds</th><th>Filled by</th></tr>
+<thead><tr><th scope="col">Table</th><th scope="col">Holds</th><th scope="col">Filled by</th></tr></thead>
+<tbody>
 <tr><td><code>cmdb_ci_computer</code> / <code>cmdb_ci_vm_instance</code></td><td>Hardware &amp; VM CIs with cores, sockets, cluster links</td><td>Discovery / integrations</td></tr>
 <tr><td><code>cmdb_sam_sw_install</code></td><td>Every discovered installation (one row per install per device)</td><td>Discovery, SCCM, Intune…</td></tr>
 <tr><td><code>cmdb_sam_sw_discovery_model</code></td><td>Unique raw software signatures + normalization status</td><td>Auto-created from installs</td></tr>
@@ -912,6 +928,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><code>samp_sw_entitlement</code></td><td>Entitlements: counts, metric, license type, dates, cost</td><td>You / imports (MLS, PPA…)</td></tr>
 <tr><td>Reconciliation results</td><td>Per software model: rights owned, rights used, position, true-up cost</td><td>Reconciliation engine</td></tr>
 <tr><td>Subscriptions / SaaS licenses</td><td>Per-user assignments &amp; activity for SaaS products</td><td>Direct + SSO connectors</td></tr>
+</tbody>
 </table></div>
 <p class="small mut">Exact table names can vary by release/scope; confirm in your instance via <code>sys_db_object</code>. The five bolded above are stable and safe to quote.</p>
 
@@ -939,12 +956,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 </div>
 <h4>Normalization statuses you will see on discovery models</h4>
 <div class="scroll"><table>
-<tr><th>Status</th><th>Meaning</th><th>Your action</th></tr>
+<thead><tr><th scope="col">Status</th><th scope="col">Meaning</th><th scope="col">Your action</th></tr></thead>
+<tbody>
 <tr><td><span class="pill good">Normalized</span></td><td>Full match: publisher, product, version, edition</td><td>None. It flows to reconciliation.</td></tr>
 <tr><td><span class="pill">Partially normalized</span></td><td>Product recognized, some attributes missing (e.g. edition unknown)</td><td>Review; may reconcile with assumptions</td></tr>
 <tr><td><span class="pill">Publisher normalized</span></td><td>Only the publisher was recognized</td><td>Investigate if the product matters (is it licensable?)</td></tr>
 <tr><td><span class="pill saas">Manually normalized</span></td><td>A human mapped it via normalization rule</td><td>Document why; survives content updates</td></tr>
 <tr><td><span class="pill bad">New / not normalized</span></td><td>Content library has never seen this string</td><td>Create manual rule or request content update</td></tr>
+</tbody>
 </table></div>
 <div class="co tip"><div class="i">💡</div><div class="b"><b>Consultant workflow for the "New" pile</b>
 <p>Sort un-normalized discovery models by install count, descending. Fix the top 20 first: ten manual rules often move coverage from 70% to 88%. Ignore the long tail of one-off utilities; chase licensable software (things that cost money), not screensavers.</p></div></div>
@@ -1013,25 +1032,29 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <div class="st"><b>5 · Emit</b><span>Per-model result + per-install license state + remediation options + true-up cost</span></div>
 </div>
 <div class="scroll"><table>
-<tr><th>Engine behavior</th><th>Why it is designed that way</th><th>What you should check</th></tr>
+<thead><tr><th scope="col">Engine behavior</th><th scope="col">Why it is designed that way</th><th scope="col">What you should check</th></tr></thead>
+<tbody>
 <tr><td>Restricted entitlements (location/department conditions) allocate before global ones</td><td>Prevents a regional license "leaking" to cover global installs it legally cannot</td><td>Condition fields on entitlements match the contract language</td></tr>
 <tr><td>Version-exact entitlements burn before downgrade-eligible ones</td><td>Keeps flexible rights in reserve, minimizing shortfall</td><td>Downgrade paths exist between the right software models</td></tr>
 <tr><td>Suite components collapse into suite consumption before counting</td><td>Stops triple-counting Word+Excel+Outlook</td><td>Suite definitions list the right components per edition</td></tr>
 <tr><td>Installs on CIs with missing core/cluster data get flagged, not guessed</td><td>A guess would be indefensible in audit</td><td>Work the exception list; fix CI attributes at the source</td></tr>
 <tr><td>Expired subscriptions contribute zero rights</td><td>Terms ended; rights ended</td><td>End dates and renewals maintained, or positions suddenly crater</td></tr>
+</tbody>
 </table></div>
 <div class="co story"><div class="i">📖</div><div class="b"><b>Analogy: boarding a flight</b>
 <p>The engine boards passengers (installs) using tickets (entitlements): assigned-seat tickets first (restricted), then exact-fare tickets (version-locked), then flexible fares (downgrade rights), and only then counts who is left standing (unlicensed). If you board flexible fares first you strand passengers a cheaper ticket could have covered; that is why allocation order matters and why "just subtract totals" spreadsheets get different, wronger numbers.</p></div></div>
 
 <h3 id="p3-jobs">3.11 The scheduled jobs that quietly run everything</h3>
 <div class="scroll"><table>
-<tr><th>Job / automation</th><th>Typical cadence</th><th>When it silently fails, you see…</th></tr>
+<thead><tr><th scope="col">Job / automation</th><th scope="col">Typical cadence</th><th scope="col">When it silently fails, you see…</th></tr></thead>
+<tbody>
 <tr><td>Content Library sync</td><td>Weekly (or per release schedule)</td><td>Normalization % decays as new versions arrive unrecognized</td></tr>
 <tr><td>Discovery schedules / SCCM &amp; Intune imports</td><td>Daily</td><td>Install counts freeze; new machines missing; stale "last discovered" dates</td></tr>
 <tr><td>M365 / SaaS connector syncs</td><td>Daily</td><td>Subscription &amp; activity data stale; inactive-seat lists stop moving</td></tr>
 <tr><td>ILMT / vCenter imports</td><td>Daily–weekly</td><td>PVU consumption flatlines; cluster topology drifts from reality</td></tr>
 <tr><td>Reconciliation runs</td><td>Nightly or weekly per publisher</td><td>"Last reconciled" ages; dashboards describe last month</td></tr>
 <tr><td>Reclamation candidate generation + workflows</td><td>Daily–weekly</td><td>Savings pipeline dries up; users stop getting reclaim notices</td></tr>
+</tbody>
 </table></div>
 <p class="small">First move on any inherited instance: open the scheduled-jobs list, check every SAM-related job's last run status, and only then look at a single dashboard. A beautiful dashboard fed by dead jobs is the most dangerous artifact in SAM.</p>
 
@@ -1063,7 +1086,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <h3 id="p4-ent">4.3 Walkthrough 2: record an entitlement</h3>
 <div class="path"><b>Software Asset</b> <span class="s">▸</span> Licensing <span class="s">▸</span> Software Entitlements <span class="s">▸</span> New</div>
 <div class="scroll"><table>
-<tr><th>Field</th><th>What to enter</th><th>Why it matters</th></tr>
+<thead><tr><th scope="col">Field</th><th scope="col">What to enter</th><th scope="col">Why it matters</th></tr></thead>
+<tbody>
 <tr><td><b>Software model</b></td><td>The shelf this purchase belongs to</td><td>Wrong model = rights applied to wrong product</td></tr>
 <tr><td><b>License metric</b></td><td>Per user / per device / per core / PVU…</td><td>Drives the consumption math entirely</td></tr>
 <tr><td><b>Purchased rights</b></td><td>Quantity bought (e.g. 500)</td><td>The "tickets" side of the ELP</td></tr>
@@ -1071,6 +1095,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><b>Maintenance / SA flag &amp; dates</b></td><td>Active Software Assurance / S&amp;S window</td><td>Gates upgrade rights, mobility, failover benefits</td></tr>
 <tr><td><b>Cost fields</b></td><td>Unit cost, PO, vendor, contract reference</td><td>Turns compliance gaps into money numbers; audit paper trail</td></tr>
 <tr><td><b>Assigned condition / allocation</b></td><td>Restrict to location, department, or specific CIs if the contract does</td><td>Regional licenses must not cover global installs</td></tr>
+</tbody>
 </table></div>
 <div class="co trap"><div class="i">⚠️</div><div class="b"><b>Where ELPs quietly rot</b>
 <p>Entitlements without dates, metrics guessed as "per user" by default, and maintenance flags never updated after renewals. An ELP is only as defensible as its worst entitlement record. During audits, every entitlement needs a paper trail (PO/invoice/agreement).</p></div></div>
@@ -1170,7 +1195,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 </div>
 <h4>The workbook structure that survives review</h4>
 <div class="scroll"><table>
-<tr><th>Tab</th><th>Contents</th><th>Golden rule</th></tr>
+<thead><tr><th scope="col">Tab</th><th scope="col">Contents</th><th scope="col">Golden rule</th></tr></thead>
+<tbody>
 <tr><td><b>00_ReadMe</b></td><td>Scope, data cut dates, sources, assumptions log, version history</td><td>Every judgement call written down; an ELP without an assumptions log is not defensible</td></tr>
 <tr><td><b>01_Raw_Inventory</b></td><td>Untouched exports (one tab per source)</td><td>Never edit raw tabs; transform in copies</td></tr>
 <tr><td><b>02_Hardware</b></td><td>RVTools vHost/vInfo (sockets, cores, vCPU, cluster) + physical list</td><td>Cluster column is your virtualization licensing driver</td></tr>
@@ -1179,14 +1205,17 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><b>05_Calc_&lt;product&gt;</b></td><td>Metric math per big product (formulas visible, no hardcoded results)</td><td>Reviewer must be able to trace every number</td></tr>
 <tr><td><b>06_ELP_Summary</b></td><td>Owned / consumed / position / £€$ exposure per product + RAG status</td><td>This is the page executives see</td></tr>
 <tr><td><b>07_Risks_Actions</b></td><td>Findings, remediation options, owners, dates</td><td>An ELP without actions is trivia</td></tr>
+</tbody>
 </table></div>
 
 <h4>Manual recipes per Tier-1 publisher</h4>
 <div class="scroll"><table>
-<tr><th></th><th>Consumption data (by hand)</th><th>Entitlement data</th><th>The Excel math</th></tr>
-<tr><td><b><span class="pill ms">Microsoft</span></b></td><td>SCCM/Intune software exports; SQL instances &amp; editions (SCCM inventory, registry/service scans); AD user/device counts for CALs; RVTools for hosts/VMs</td><td>MLS from Microsoft/LSP + CSP/portal exports + POs</td><td>Per server: <code>=MAX(16, MAX(8,cores_per_proc)×procs)</code> Windows cores; per SQL VM: <code>=MAX(4, vCPU)</code>; Std stacking vs Datacenter compare; CAL gap = active users − CALs owned; check SA dates before applying upgrade rights</td></tr>
-<tr><td><b><span class="pill ora">Oracle</span></b></td><td>DBA-run scripts per database: version/edition, <code>V$OPTION</code>, <code>DBA_FEATURE_USAGE_STATISTICS</code> (options used), user counts; RVTools for the cluster blast radius</td><td>Support renewal / CSI records, ordering documents, ULA certificates</td><td>Processors = <code>CEILING(cores × core_factor)</code> per host in reach; NUP = <code>MAX(actual_users, 25 × processors)</code> (EE); options matrix: each used option × same processor count; SE2: sockets ≤ 2 check, min 10 NUP/server</td></tr>
-<tr><td><b><span class="pill ibm">IBM</span></b></td><td><b>With ILMT:</b> its quarterly sub-capacity report IS the consumption number. <b>Without ILMT:</b> full capacity by hand: every host running the product × all host cores × PVU/core from IBM's table</td><td>Passport Advantage entitlement report (map part numbers → products carefully; bundles hide inside)</td><td>Sub-cap: <code>MIN(VM vCPU, host cores) × PVU_rate</code> summed per product; full-cap: <code>host_cores × PVU_rate</code>; flag every server not covered by ILMT as full-capacity risk with the cost delta shown</td></tr>
+<thead><tr><th scope="col"></th><th scope="col">Consumption data (by hand)</th><th scope="col">Entitlement data</th><th scope="col">The Excel math</th></tr></thead>
+<tbody>
+<tr><th scope="row"><b><span class="pill ms">Microsoft</span></b></th><td>SCCM/Intune software exports; SQL instances &amp; editions (SCCM inventory, registry/service scans); AD user/device counts for CALs; RVTools for hosts/VMs</td><td>MLS from Microsoft/LSP + CSP/portal exports + POs</td><td>Per server: <code>=MAX(16, MAX(8,cores_per_proc)×procs)</code> Windows cores; per SQL VM: <code>=MAX(4, vCPU)</code>; Std stacking vs Datacenter compare; CAL gap = active users − CALs owned; check SA dates before applying upgrade rights</td></tr>
+<tr><th scope="row"><b><span class="pill ora">Oracle</span></b></th><td>DBA-run scripts per database: version/edition, <code>V$OPTION</code>, <code>DBA_FEATURE_USAGE_STATISTICS</code> (options used), user counts; RVTools for the cluster blast radius</td><td>Support renewal / CSI records, ordering documents, ULA certificates</td><td>Processors = <code>CEILING(cores × core_factor)</code> per host in reach; NUP = <code>MAX(actual_users, 25 × processors)</code> (EE); options matrix: each used option × same processor count; SE2: sockets ≤ 2 check, min 10 NUP/server</td></tr>
+<tr><th scope="row"><b><span class="pill ibm">IBM</span></b></th><td><b>With ILMT:</b> its quarterly sub-capacity report IS the consumption number. <b>Without ILMT:</b> full capacity by hand: every host running the product × all host cores × PVU/core from IBM's table</td><td>Passport Advantage entitlement report (map part numbers → products carefully; bundles hide inside)</td><td>Sub-cap: <code>MIN(VM vCPU, host cores) × PVU_rate</code> summed per product; full-cap: <code>host_cores × PVU_rate</code>; flag every server not covered by ILMT as full-capacity risk with the cost delta shown</td></tr>
+</tbody>
 </table></div>
 <div class="co trap"><div class="i">⚠️</div><div class="b"><b>Manual ELP pitfalls (each one has burned a real consultant)</b>
 <p>Stale data cut quoted as current · VLOOKUP duplicates silently double-counting installs · forgetting minimum floors (16-core, 25-NUP, 10-NUP) · counting DR/passive servers without checking failover rights · applying upgrade rights where SA/S&amp;S lapsed · no assumptions log, so the whole model dies under one hostile question · one un-versioned "ELP_final_v7_REAL.xlsx" as key-person risk. Date-stamp files, log assumptions, peer-review formulas.</p></div></div>
@@ -1208,7 +1237,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 </ol>
 <h4>Recipe C · Troubleshooting matrix (tape this to your monitor)</h4>
 <div class="scroll"><table>
-<tr><th>Symptom</th><th>Most likely cause</th><th>Where to fix</th></tr>
+<thead><tr><th scope="col">Symptom</th><th scope="col">Most likely cause</th><th scope="col">Where to fix</th></tr></thead>
+<tbody>
 <tr><td>Software model shows zero installs for software you know is deployed</td><td>Discovery model not normalized, or mapped to a different model</td><td>Discovery model status + mapping; normalization rule</td></tr>
 <tr><td>Consumption roughly double reality</td><td>Two inventory sources reporting the same devices; CI dedup broken</td><td>Source precedence / CI identification rules</td></tr>
 <tr><td>Reconciliation shows zero rights despite loaded entitlements</td><td>Entitlement on wrong model, wrong metric, or expired dates</td><td>Entitlement record; re-run recon</td></tr>
@@ -1216,6 +1246,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td>M365 numbers frozen for days</td><td>Connector job failing (expired secret/cert is the classic)</td><td>Integration profile credentials; job log</td></tr>
 <tr><td>Position swings wildly between runs</td><td>Import timing races (recon ran mid-import) or flapping data source</td><td>Job sequencing: imports before recon</td></tr>
 <tr><td>Reclamation candidates empty for months</td><td>Usage/metering feed dead, or rule thresholds never met</td><td>Usage import job; rule definition</td></tr>
+</tbody>
 </table></div>
 
 <div class="co mic"><div class="i">🎤</div><div class="b"><b>Part 4 in one interview answer</b>
@@ -1254,12 +1285,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p5-agree">5.1 The agreement landscape</h3>
 <div class="scroll"><table>
-<tr><th>Agreement</th><th>Who it fits</th><th>Term &amp; billing</th><th>SAM-relevant traits</th></tr>
+<thead><tr><th scope="col">Agreement</th><th scope="col">Who it fits</th><th scope="col">Term &amp; billing</th><th scope="col">SAM-relevant traits</th></tr></thead>
+<tbody>
 <tr><td><b>EA</b> (Enterprise Agreement)</td><td>Large enterprise (historically 500+ users)</td><td>3 years, annual payments</td><td>Annual <b>true-up</b> for growth; reductions only at renewal; org-wide commitments; Microsoft is steering smaller EAs toward CSP/MCA-E</td></tr>
 <tr><td><b>CSP</b> (Cloud Solution Provider, NCE)</td><td>Any size via a partner</td><td>Monthly/annual subscriptions</td><td>Flexible seat counts but strict cancellation windows under New Commerce Experience</td></tr>
 <tr><td><b>MCA-E</b> (Microsoft Customer Agreement – Enterprise)</td><td>Direct digital successor to many EAs</td><td>Evergreen, buy-what-you-need</td><td>Fewer negotiated protections; watch price locks</td></tr>
 <tr><td><b>MPSA</b></td><td>Transactional volume purchases</td><td>Perpetual + subscriptions</td><td>Common source of historical perpetual entitlements</td></tr>
 <tr><td><b>SPLA</b></td><td>Service providers hosting for others</td><td>Monthly reported usage</td><td>Different rules entirely; report what runs each month</td></tr>
+</tbody>
 </table></div>
 <div class="co tip"><div class="i">💡</div><div class="b"><b>Entitlement source of truth</b>
 <p>Ask Microsoft or the reseller (LSP) for the <b>MLS (Microsoft License Statement)</b>: the consolidated record of everything the customer ever bought through volume licensing, including Software Assurance status. SAM Pro's Microsoft pack imports the MLS and generates entitlements automatically. Always reconcile MLS against local PO records; both have gaps.</p></div></div>
@@ -1289,10 +1322,12 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 </div>
 <h4>Standard vs Datacenter: it is all about VM density</h4>
 <div class="scroll"><table>
-<tr><th></th><th>Standard</th><th>Datacenter</th></tr>
-<tr><td><b>VM rights per full set of core licenses</b></td><td>2 VMs (OSEs). Want 2 more? License <b>all cores again</b> ("stacking").</td><td><b>Unlimited VMs</b> on the licensed host</td></tr>
-<tr><td><b>Break-even intuition</b></td><td colspan="2">Datacenter costs roughly 5–6× Standard; above ~10–13 VMs per host, Datacenter wins. Compute it per price list.</td></tr>
-<tr><td><b>Best for</b></td><td>Physical servers, low-density hosts</td><td>Virtualization clusters</td></tr>
+<thead><tr><th scope="col"></th><th scope="col">Standard</th><th scope="col">Datacenter</th></tr></thead>
+<tbody>
+<tr><th scope="row"><b>VM rights per full set of core licenses</b></th><td>2 VMs (OSEs). Want 2 more? License <b>all cores again</b> ("stacking").</td><td><b>Unlimited VMs</b> on the licensed host</td></tr>
+<tr><th scope="row"><b>Break-even intuition</b></th><td colspan="2">Datacenter costs roughly 5–6× Standard; above ~10–13 VMs per host, Datacenter wins. Compute it per price list.</td></tr>
+<tr><th scope="row"><b>Best for</b></th><td>Physical servers, low-density hosts</td><td>Virtualization clusters</td></tr>
+</tbody>
 </table></div>
 <div class="calc ms">
   <div class="box"><b>Host: 2×16 cores</b><span>32 cores to license</span></div>
@@ -1319,10 +1354,12 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p5-sql">5.3 SQL Server: where audits find money</h3>
 <div class="scroll"><table>
-<tr><th>Edition</th><th>Metrics allowed</th><th>Key numbers</th></tr>
+<thead><tr><th scope="col">Edition</th><th scope="col">Metrics allowed</th><th scope="col">Key numbers</th></tr></thead>
+<tbody>
 <tr><td><b>Enterprise</b></td><td>Per-core only</td><td>Min <b>4 core licenses per VM or server</b>; unlimited virtualization only when <b>all host cores licensed + SA</b></td></tr>
 <tr><td><b>Standard</b></td><td>Per-core <i>or</i> Server + CAL</td><td>Same 4-core minimum per VM on per-core; Server+CAL needs a CAL for every user/device touching it</td></tr>
 <tr><td><b>Developer / Express</b></td><td>Free</td><td>Developer = non-production only. Prod use of Developer edition is a classic audit finding.</td></tr>
+</tbody>
 </table></div>
 <h4>Virtualization: the decision every architect gets wrong once</h4>
 <div class="two">
@@ -1410,12 +1447,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p5-sa">5.6 Software Assurance: the rights multiplier</h3>
 <div class="scroll"><table>
-<tr><th>SA benefit</th><th>What it unlocks</th><th>Where it shows up in SAM Pro</th></tr>
+<thead><tr><th scope="col">SA benefit</th><th scope="col">What it unlocks</th><th scope="col">Where it shows up in SAM Pro</th></tr></thead>
+<tbody>
 <tr><td><b>New version rights</b></td><td>Run the latest version (upgrade rights)</td><td>Entitlement covers newer installs during reconciliation</td></tr>
 <tr><td><b>License Mobility</b></td><td>Move server workloads across hosts/farms and into authorized clouds</td><td>Virtualization compliance depends on it</td></tr>
 <tr><td><b>Failover rights</b></td><td>Free passive HA/DR replicas (SQL)</td><td>Passive servers excluded from consumption</td></tr>
 <tr><td><b>Azure Hybrid Benefit</b></td><td>Reuse Windows/SQL licenses in Azure, pay compute-only</td><td>Cloud cost simulations; BYOL tracking</td></tr>
 <tr><td><b>Step-up, training, support</b></td><td>Edition upgrades, vouchers</td><td>Negotiation levers at renewal</td></tr>
+</tbody>
 </table></div>
 <div class="calc ms">
   <div class="box"><b>Azure VM: 16 vCPU</b><span>Windows Server pay-as-you-go</span></div>
@@ -1467,7 +1506,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 </div>
 <h4>Side-by-side: what a SAM consultant must know about each</h4>
 <div class="scroll"><table>
-<tr><th>Agreement</th><th>Entry point</th><th>Term</th><th>Perpetual rights?</th><th>Reduce mid-term?</th><th>Entitlement evidence lives in</th><th>SAM watchpoints</th></tr>
+<thead><tr><th scope="col">Agreement</th><th scope="col">Entry point</th><th scope="col">Term</th><th scope="col">Perpetual rights?</th><th scope="col">Reduce mid-term?</th><th scope="col">Entitlement evidence lives in</th><th scope="col">SAM watchpoints</th></tr></thead>
+<tbody>
 <tr><td><b>EA</b></td><td>Historically 500+ users/devices (Microsoft now pushing smaller EAs out)</td><td>3 yrs, annual payments</td><td class="y">✓ (L&amp;SA)</td><td class="n">✗ only at renewal</td><td>VLSC / Volume Licensing Central, MLS</td><td>True-up accuracy; seat drift; renewal leverage window</td></tr>
 <tr><td><b>EAS</b></td><td>Same as EA</td><td>3 yrs</td><td class="n">✗ subscription</td><td class="y">✓ annually</td><td>VLSC / MLS</td><td>Cheaper yearly cost, but walk-away means losing everything</td></tr>
 <tr><td><b>MPSA</b></td><td>Any size, transactional</td><td>Evergreen account</td><td class="y">✓ available</td><td>n/a (buy as needed)</td><td>Business Center / MLS</td><td>Common source of forgotten perpetual history</td></tr>
@@ -1475,6 +1515,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><b>MCA-E</b></td><td>Microsoft-direct enterprise</td><td>Evergreen, buy-what-you-need</td><td>Mostly subscription</td><td class="y">✓ per term rules</td><td>M365 admin center / billing account</td><td>Fewer negotiated protections than the EA it replaced; watch price locks</td></tr>
 <tr><td><b>CSP (NCE)</b></td><td>Any size via partner</td><td>Monthly / annual / 3-yr per seat</td><td>Subscriptions (+ CSP perpetual SKUs)</td><td>Only at term end; 7-day cancel window at start</td><td>Partner Center exports</td><td>Auto-renew lock-ins; mixed partner invoices; get monthly seat reports</td></tr>
 <tr><td><b>SPLA</b></td><td>Service providers</td><td>Monthly reported</td><td class="n">✗</td><td class="y">✓ report actuals</td><td>Provider's monthly SPLA reports</td><td>Hosting scenarios: whose license covers the workload?</td></tr>
+</tbody>
 </table></div>
 <h4>EA price levels &amp; the negotiation calendar</h4>
 <div class="cards">
@@ -1511,11 +1552,13 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>② Windows Server: Standard stacking vs Datacenter break-even</h4>
 <div class="scroll"><table>
-<tr><th>Host 2×16 = 32 cores</th><th>Standard (stacked)</th><th>Datacenter</th></tr>
+<thead><tr><th scope="col">Host 2×16 = 32 cores</th><th scope="col">Standard (stacked)</th><th scope="col">Datacenter</th></tr></thead>
+<tbody>
 <tr><td>2 VMs</td><td>32 cores ≈ $2,138</td><td rowspan="4">32 cores ≈ $12,310<br><span class="small mut">unlimited VMs</span></td></tr>
 <tr><td>6 VMs</td><td>3 stacks × 32 = 96 cores ≈ $6,414</td></tr>
 <tr><td>12 VMs</td><td>6 stacks × 32 = 192 cores ≈ $12,828 ⚠️</td></tr>
 <tr><td>20 VMs</td><td>10 stacks ≈ $21,380</td></tr>
+</tbody>
 </table></div>
 <p class="small">Break-even lands around 11–12 VMs on this host: below it stack Standard, above it buy Datacenter. Show this table in workshops; it ends the debate instantly.</p>
 
@@ -1612,13 +1655,15 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p6-map">6.1 The product &amp; metric map</h3>
 <div class="scroll"><table>
-<tr><th>Product family</th><th>Metrics</th><th>The thing to remember</th></tr>
+<thead><tr><th scope="col">Product family</th><th scope="col">Metrics</th><th scope="col">The thing to remember</th></tr></thead>
+<tbody>
 <tr><td><b>Database Enterprise Edition (EE)</b></td><td>Processor <i>or</i> Named User Plus (NUP)</td><td>Processor = cores × core factor; NUP has per-processor minimums</td></tr>
 <tr><td><b>Database Standard Edition 2 (SE2)</b></td><td>Per socket (processor) <i>or</i> NUP</td><td>Max 2 sockets per server; 16-thread runtime cap; min 10 NUP/server</td></tr>
 <tr><td><b>Options &amp; Management Packs</b></td><td>Must match the DB's metric &amp; count</td><td>EE-only; "used" even if switched on accidentally</td></tr>
 <tr><td><b>Middleware (WebLogic etc.)</b></td><td>Processor / NUP</td><td>Same core-factor math; suites bundle options</td></tr>
 <tr><td><b>Java SE</b></td><td>Per <b>employee</b> (since Jan 2023)</td><td>All employees + contractors count, not just users</td></tr>
 <tr><td><b>E-Business Suite / apps</b></td><td>App-specific user/metric definitions</td><td>Custom metrics live in the ordering document</td></tr>
+</tbody>
 </table></div>
 
 <h3 id="p6-proc">6.2 Processor licensing: cores × core factor</h3>
@@ -1630,10 +1675,12 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <div class="box res"><b>16 Processor licenses</b><span>per product on that server</span></div>
 </div>
 <div class="scroll"><table>
-<tr><th>Chip family</th><th>Core factor (typical)</th></tr>
+<thead><tr><th scope="col">Chip family</th><th scope="col">Core factor (typical)</th></tr></thead>
+<tbody>
 <tr><td>Intel / AMD x86</td><td class="c"><b>0.5</b></td></tr>
 <tr><td>IBM POWER</td><td class="c"><b>1.0</b></td></tr>
 <tr><td>Oracle SPARC (varies by model)</td><td class="c">0.25 – 0.75</td></tr>
+</tbody>
 </table></div>
 <p class="small mut">Always pull the current <b>Oracle Processor Core Factor Table</b>; values are per chip model. In authorized public clouds the factor does not apply (see 6.7).</p>
 <p><b>Every product stacks.</b> EE + Partitioning + Diagnostics Pack on that 32-core server = 16 licenses <i>of each</i>. Options are priced per the same metric as the database they run under.</p>
@@ -1702,11 +1749,13 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>DR, standby and backups: what is free and what is not</h4>
 <div class="scroll"><table>
-<tr><th>Setup</th><th>License needed?</th><th>The rule</th></tr>
+<thead><tr><th scope="col">Setup</th><th scope="col">License needed?</th><th scope="col">The rule</th></tr></thead>
+<tbody>
 <tr><td>Backup files on storage / tape</td><td class="y">Free</td><td>Copies at rest are fine; testing restores on an unlicensed server is tolerated only within narrow limits (a few short tests per year), so log every test</td></tr>
 <tr><td>Cold spare in the <b>same cluster</b> (failover)</td><td class="y">Mostly free</td><td>The <b>10-day rule</b>: an unlicensed failover node may run Oracle for up to 10 separate days per calendar year, then it must be licensed</td></tr>
 <tr><td>Data Guard / active standby (mirrored, running)</td><td class="n">Full license</td><td>If the Oracle binary is installed and running (even idle standby), it is licensable, same metric and options as primary</td></tr>
 <tr><td>Storage-level replication target (Oracle not installed)</td><td class="y">Free</td><td>Blocks on disk are not a database; license only when you mount and start it</td></tr>
+</tbody>
 </table></div>
 <div class="co trap"><div class="i">⚠️</div><div class="b"><b>Non-production is NOT free at Oracle</b>
 <p>Unlike Microsoft's Developer edition and Visual Studio benefits, Oracle dev, test and QA environments need <b>full licenses</b> with the same options. The OTN free developer license covers a single developer prototyping, not your integration-test cluster. Whole audit findings are built on "it's only test."</p></div></div>
@@ -1800,7 +1849,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <p>Auditors argue from policy PDFs; you answer from ordering documents and the OMA. Anything not written in the signed stack is an interpretation, and interpretations are negotiable. This one sentence has saved clients eight figures.</p></div></div>
 <h4>License categories you must distinguish on sight</h4>
 <div class="scroll"><table>
-<tr><th>Category</th><th>What it is</th><th>Cost profile</th><th>SAM / audit watchpoints</th></tr>
+<thead><tr><th scope="col">Category</th><th scope="col">What it is</th><th scope="col">Cost profile</th><th scope="col">SAM / audit watchpoints</th></tr></thead>
+<tbody>
 <tr><td><b>Full Use perpetual</b></td><td>Standard license, any lawful use</td><td>List price − negotiated discount + 22% support/yr</td><td>The default; support repricing rules bind sets together</td></tr>
 <tr><td><b>Term license</b></td><td>Time-limited Full Use (rare now)</td><td>% of perpetual per year</td><td>Expiry dates must live on the entitlement</td></tr>
 <tr><td><b>ASFU</b> (Application Specific Full Use)</td><td>Sold via an ISV, usable ONLY under that application</td><td>Cheaper (often 40–60% of Full Use)</td><td>Classic finding: ASFU database reused for other apps = unlicensed</td></tr>
@@ -1809,6 +1859,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><b>PULA</b></td><td>Perpetual ULA: no end date, no scheduled certification</td><td>Bigger fixed fee</td><td>Trigger events (M&amp;A, divestiture) can force certification; read them</td></tr>
 <tr><td><b>Java SE Universal Subscription</b></td><td>Per-employee, monthly, all staff + contractors</td><td>Tiered ~$15 → ~$5.25/employee/mo list</td><td>Headcount, not deployment, drives cost</td></tr>
 <tr><td><b>OCI / Cloud</b></td><td>Universal Credits (IaaS/PaaS), SaaS subscriptions, BYOL</td><td>Consumption or per-user/mo</td><td>BYOL pledges must not double-count on-prem</td></tr>
+</tbody>
 </table></div>
 <h4>How buying actually works</h4>
 <div class="cards">
@@ -1832,12 +1883,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>② The same box with options (how audits triple the bill)</h4>
 <div class="scroll"><table>
-<tr><th>Item</th><th>Metric follows the DB</th><th>Cost on 16 processors</th></tr>
+<thead><tr><th scope="col">Item</th><th scope="col">Metric follows the DB</th><th scope="col">Cost on 16 processors</th></tr></thead>
+<tbody>
 <tr><td>Database EE</td><td>16 × $47,500</td><td>$760,000</td></tr>
 <tr><td>Partitioning (one partitioned table found)</td><td>16 × $11,500</td><td>$184,000</td></tr>
 <tr><td>Diagnostics Pack (AWR report opened)</td><td>16 × $7,500</td><td>$120,000</td></tr>
 <tr><td>Tuning Pack (SQL Tuning Advisor used)</td><td>16 × $5,000</td><td>$80,000</td></tr>
 <tr><td><b>Total exposure</b></td><td></td><td><b>$1.144M + 22%/yr</b></td></tr>
+</tbody>
 </table></div>
 <p class="small">Three casual DBA actions added ~50% to the database bill. This is why option usage review is a standing quarterly task, not an audit-time scramble.</p>
 
@@ -1881,13 +1934,15 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>⑦ Java SE Universal Subscription</h4>
 <div class="scroll"><table>
-<tr><th>Total employees (incl. contractors)</th><th>List $/employee/month</th><th>Example annual cost</th></tr>
+<thead><tr><th scope="col">Total employees (incl. contractors)</th><th scope="col">List $/employee/month</th><th scope="col">Example annual cost</th></tr></thead>
+<tbody>
 <tr><td>1 – 999</td><td>$15.00</td><td>800 staff → $144k/yr</td></tr>
 <tr><td>1,000 – 2,999</td><td>$12.00</td><td>2,500 → $360k/yr</td></tr>
 <tr><td>3,000 – 9,999</td><td>$10.50</td><td>6,000 → $756k/yr</td></tr>
 <tr><td>10,000 – 19,999</td><td>$8.25</td><td>12,000 → $1.19M/yr</td></tr>
 <tr><td>20,000 – 29,999</td><td>$6.75</td><td>25,000 → $2.03M/yr</td></tr>
 <tr><td>40,000 – 49,999</td><td>$5.25</td><td>45,000 → $2.84M/yr</td></tr>
+</tbody>
 </table></div>
 <p class="small">One developer laptop with Oracle JDK can technically trigger the whole-company metric. That asymmetry is why OpenJDK migration is usually the answer, not negotiation.</p>
 
@@ -1950,10 +2005,12 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <div class="box res"><b>560 PVUs</b><span>entitlements required</span></div>
 </div>
 <div class="scroll"><table>
-<tr><th>Processor family</th><th>PVU per core (illustrative)</th></tr>
+<thead><tr><th scope="col">Processor family</th><th scope="col">PVU per core (illustrative)</th></tr></thead>
+<tbody>
 <tr><td>Intel Xeon, ≤ 2 sockets</td><td class="c"><b>70</b></td></tr>
 <tr><td>Intel Xeon, 4+ sockets / high-end</td><td class="c">100</td></tr>
 <tr><td>IBM POWER</td><td class="c">100–120</td></tr>
+</tbody>
 </table></div>
 <p class="small mut">Always confirm against IBM's current PVU table per chip model; these values are for intuition and interview math.</p>
 
@@ -1995,12 +2052,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p7-metrics">7.4 The rest of the metric zoo</h3>
 <div class="scroll"><table>
-<tr><th>Metric</th><th>Counts</th><th>Typical products</th><th>Trap</th></tr>
+<thead><tr><th scope="col">Metric</th><th scope="col">Counts</th><th scope="col">Typical products</th><th scope="col">Trap</th></tr></thead>
+<tbody>
 <tr><td><b>Authorized User</b></td><td>Named person per installation/instance</td><td>Db2, Cognos</td><td>Same person on 2 environments may need 2 entitlements (product-specific)</td></tr>
 <tr><td><b>Floating / Concurrent</b></td><td>Peak simultaneous users</td><td>Engineering/older tools</td><td>Needs peak metering evidence</td></tr>
 <tr><td><b>RVU</b> (Resource Value Unit)</td><td>Managed resources (endpoints, TB, activities) via conversion tables</td><td>Monitoring, storage, backup tools</td><td>Tiered conversion tables change by product</td></tr>
 <tr><td><b>Install</b></td><td>Per installation</td><td>Desktop-ish products</td><td>Straightforward, rare</td></tr>
 <tr><td><b>VPC</b> (Virtual Processor Core)</td><td>vCPU cores, container-aware</td><td><b>Cloud Paks</b>, modern IBM</td><td>Containers need <b>IBM License Service</b> running in the cluster as evidence</td></tr>
+</tbody>
 </table></div>
 
 <h3 id="p7-cloudpak">7.5 Cloud Paks: IBM's modern packaging</h3>
@@ -2059,7 +2118,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <p class="small">The <b>LI document</b> is IBM's equivalent of Oracle's ordering fine print: metric definitions, user minimums and special conditions live there, per product per version. Reading LIs is a billable superpower.</p>
 <h4>Program flavors &amp; license types</h4>
 <div class="scroll"><table>
-<tr><th>Vehicle</th><th>What it is</th><th>Term</th><th>SAM watchpoints</th></tr>
+<thead><tr><th scope="col">Vehicle</th><th scope="col">What it is</th><th scope="col">Term</th><th scope="col">SAM watchpoints</th></tr></thead>
+<tbody>
 <tr><td><b>Passport Advantage (PA)</b></td><td>Relationship program: site enrollment, all purchases accumulate points, volume level (RSVP/SVP) sets discounts, anniversaries co-term</td><td>Evergreen program</td><td>The PAO entitlement report is your IBM source of truth; multiple site numbers per enterprise cause miscounts</td></tr>
 <tr><td><b>PA Express</b></td><td>Transactional flavor for smaller orgs, order by order</td><td>Per order</td><td>Entitlements scattered across orders; gather PoEs</td></tr>
 <tr><td><b>Perpetual + S&amp;S</b></td><td>Classic IPLA license; S&amp;S ~20–25%/yr renews upgrade rights</td><td>Perpetual</td><td>Lapsed S&amp;S + upgraded software = unlicensed; reinstatement costs more than loyalty</td></tr>
@@ -2068,6 +2128,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><b>SaaS subscriptions</b></td><td>IBM-hosted services per user/instance</td><td>Term</td><td>Standard SaaS hygiene: seats vs activity</td></tr>
 <tr><td><b>ELA / ESSO</b></td><td>Custom enterprise-wide deals: committed spend, broad usage rights</td><td>Usually 3 yrs</td><td>Know exactly which products are inside; the rest still needs normal licenses</td></tr>
 <tr><td><b>Mainframe MLC</b></td><td>Monthly License Charge for z/OS software, measured in MSUs with <b>SCRT</b> sub-capacity reports</td><td>Monthly</td><td>A parallel universe: SCRT is the mainframe's ILMT; specialist territory but know it exists</td></tr>
+</tbody>
 </table></div>
 <h4>How buying works in practice</h4>
 <div class="cards">
@@ -2110,10 +2171,12 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>④ RVU: resources, not people or cores</h4>
 <div class="scroll"><table>
-<tr><th>Managed endpoints (example product)</th><th>Illustrative conversion</th><th>RVUs</th></tr>
+<thead><tr><th scope="col">Managed endpoints (example product)</th><th scope="col">Illustrative conversion</th><th scope="col">RVUs</th></tr></thead>
+<tbody>
 <tr><td>First 1,000</td><td>1 RVU per 10</td><td>100</td></tr>
 <tr><td>Next 4,000</td><td>1 RVU per 20</td><td>200</td></tr>
 <tr><td><b>5,000 endpoints total</b></td><td></td><td><b>300 RVUs × $/RVU</b></td></tr>
+</tbody>
 </table></div>
 <p class="small">Every RVU product has its own tier table in its LI document. Never reuse another product's conversion.</p>
 
@@ -2165,12 +2228,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>Two license families live on the same machine</h4>
 <div class="scroll"><table>
-<tr><th></th><th><b>MLC</b> · Monthly License Charge</th><th><b>IPLA</b> · One-Time Charge on z</th></tr>
-<tr><td>Products</td><td>z/OS, CICS, IMS, Db2 for z/OS, MQ for z/OS, compilers</td><td>Tools and some middleware ("zIPLA" products)</td></tr>
-<tr><td>You pay</td><td><b>Every month</b>, scaled to measured MSU capacity</td><td>Once (perpetual) + annual S&amp;S</td></tr>
-<tr><td>Metric</td><td>MSU via pricing curves (AWLC etc.)</td><td><b>Value Units (VUs)</b> converted from MSUs by tier table</td></tr>
-<tr><td>Meter</td><td><b>SCRT report</b> (sub-capacity) or full machine capacity</td><td>Entitlement vs machine capacity at install</td></tr>
-<tr><td>SAM's job</td><td>Minimize the measured peak; verify the invoice</td><td>Classic entitlement tracking, like distributed IPLA</td></tr>
+<thead><tr><th scope="col"></th><th scope="col"><b>MLC</b> · Monthly License Charge</th><th scope="col"><b>IPLA</b> · One-Time Charge on z</th></tr></thead>
+<tbody>
+<tr><th scope="row">Products</th><td>z/OS, CICS, IMS, Db2 for z/OS, MQ for z/OS, compilers</td><td>Tools and some middleware ("zIPLA" products)</td></tr>
+<tr><th scope="row">You pay</th><td><b>Every month</b>, scaled to measured MSU capacity</td><td>Once (perpetual) + annual S&amp;S</td></tr>
+<tr><th scope="row">Metric</th><td>MSU via pricing curves (AWLC etc.)</td><td><b>Value Units (VUs)</b> converted from MSUs by tier table</td></tr>
+<tr><th scope="row">Meter</th><td><b>SCRT report</b> (sub-capacity) or full machine capacity</td><td>Entitlement vs machine capacity at install</td></tr>
+<tr><th scope="row">SAM's job</th><td>Minimize the measured peak; verify the invoice</td><td>Classic entitlement tracking, like distributed IPLA</td></tr>
+</tbody>
 </table></div>
 
 <h4>R4HA: the four-hour heartbeat that IS your bill</h4>
@@ -2202,21 +2267,25 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <div class="st"><span class="ico">🧾</span><b>Invoice</b><span>MLC charges follow the report directly</span></div>
 </div>
 <div class="scroll"><table>
-<tr><th></th><th>SCRT (mainframe)</th><th>ILMT (distributed)</th></tr>
-<tr><td>Measures</td><td>R4HA MSU peak per product per LPAR</td><td>Peak vCPU/core allocation per product per VM</td></tr>
-<tr><td>Cadence</td><td><b>Monthly submission to IBM</b></td><td>Quarterly reports, kept internally 2 years</td></tr>
-<tr><td>Effect</td><td><b>Directly sets the monthly invoice</b></td><td>Preserves the sub-capacity discount for audits</td></tr>
-<tr><td>Miss it and…</td><td>Full machine capacity is charged</td><td>Retroactive full-capacity exposure in audit</td></tr>
+<thead><tr><th scope="col"></th><th scope="col">SCRT (mainframe)</th><th scope="col">ILMT (distributed)</th></tr></thead>
+<tbody>
+<tr><th scope="row">Measures</th><td>R4HA MSU peak per product per LPAR</td><td>Peak vCPU/core allocation per product per VM</td></tr>
+<tr><th scope="row">Cadence</th><td><b>Monthly submission to IBM</b></td><td>Quarterly reports, kept internally 2 years</td></tr>
+<tr><th scope="row">Effect</th><td><b>Directly sets the monthly invoice</b></td><td>Preserves the sub-capacity discount for audits</td></tr>
+<tr><th scope="row">Miss it and…</th><td>Full machine capacity is charged</td><td>Retroactive full-capacity exposure in audit</td></tr>
+</tbody>
 </table></div>
 
 <h4>The pricing-metric zoo (recognize the names)</h4>
 <div class="scroll"><table>
-<tr><th>Name</th><th>One-liner</th></tr>
+<thead><tr><th scope="col">Name</th><th scope="col">One-liner</th></tr></thead>
+<tbody>
 <tr><td><b>AWLC</b> (Advanced Workload LC)</td><td>The mainstream tiered per-MSU curve on modern boxes; price per MSU falls as MSUs rise</td></tr>
 <tr><td><b>WLC / EWLC / zELC / PSLC</b></td><td>Older / entry / machine-specific / sysplex-aggregated variants of the same idea</td></tr>
 <tr><td><b>CMP</b> (Country Multiplex Pricing)</td><td>All machines in a country priced as one big pool: better tiers, easier workload moves</td></tr>
 <tr><td><b>TFP</b> (Tailored Fit Pricing, 2019+)</td><td>Cloud-style contracts: pay for MSUs actually consumed per year (or flat full-capacity), no more R4HA gaming</td></tr>
 <tr><td><b>zNALC</b></td><td>Legacy discounted z/OS for qualified new applications; superseded in spirit by TFP offers</td></tr>
+</tbody>
 </table></div>
 <div class="tree">
   <div class="q">Stay on AWLC + capping, or move to Tailored Fit Pricing?</div>
@@ -2324,12 +2393,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>The tool landscape (respect thy neighbors, know thy differences)</h4>
 <div class="scroll"><table>
-<tr><th>Tool</th><th>Historic strength</th><th>What to say in interviews</th></tr>
+<thead><tr><th scope="col">Tool</th><th scope="col">Historic strength</th><th scope="col">What to say in interviews</th></tr></thead>
+<tbody>
 <tr><td><b>ServiceNow SAM Pro</b></td><td>Platform gravity: CMDB, workflows, request/reclaim automation, one data model with ITSM/HAM</td><td>Best when ServiceNow is the operational backbone; consumes third-party inventory happily</td></tr>
 <tr><td><b>Flexera One</b></td><td>Deep inventory tech &amp; the oldest publisher-content library (ILMT-alternative status, Oracle-verified tooling)</td><td>Strong measurement heritage; often coexists as an inventory source feeding SAM Pro</td></tr>
 <tr><td><b>Snow (now part of Flexera)</b></td><td>Recognition/normalization breadth, mid-market strength</td><td>Merged into Flexera in 2023-24; many estates still run Snow agents</td></tr>
 <tr><td><b>USU / Aspera</b></td><td>License-math depth, esp. SAP and complex server metrics</td><td>Respected European specialist; consulting-heavy model</td></tr>
 <tr><td><b>Certero / Eracent / others</b></td><td>Focused platforms, Oracle/IBM niches</td><td>Appear in audits and as point solutions</td></tr>
+</tbody>
 </table></div>
 <p class="small mut">Never trash a competitor in an interview: migrations and coexistence (their agent, your platform) are half the consulting market.</p>
 
@@ -2355,13 +2426,15 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h4>Data readiness checklist (run before promising any dates)</h4>
 <div class="scroll"><table>
-<tr><th>Check</th><th>Target</th><th>Why</th></tr>
+<thead><tr><th scope="col">Check</th><th scope="col">Target</th><th scope="col">Why</th></tr></thead>
+<tbody>
 <tr><td>Discovery/inventory coverage of estate</td><td class="c">&gt; 95%</td><td>Unseen machines = unseen installs = wrong ELP</td></tr>
 <tr><td>Hardware attributes populated (cores, sockets, cluster links)</td><td class="c">Complete for servers</td><td>Core/PVU math needs them</td></tr>
 <tr><td>vCenter relationships in CMDB</td><td class="c">Current</td><td>Virtualization licensing rules</td></tr>
 <tr><td>Duplicate CIs / stale records</td><td class="c">De-duplicated</td><td>Double-counted consumption</td></tr>
 <tr><td>Entitlement history collected</td><td class="c">3–5 years + live agreements</td><td>The other half of the equation</td></tr>
 <tr><td>Usage/metering enabled</td><td class="c">Key desktop + SaaS apps</td><td>No usage = no reclamation</td></tr>
+</tbody>
 </table></div>
 
 <h3 id="p8-stake">8.3 Stakeholder map &amp; operating model</h3>
@@ -2373,13 +2446,15 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 </div>
 <h4>KPIs a mature SAM practice reports quarterly</h4>
 <div class="scroll"><table>
-<tr><th>KPI</th><th>Healthy target</th></tr>
+<thead><tr><th scope="col">KPI</th><th scope="col">Healthy target</th></tr></thead>
+<tbody>
 <tr><td>Normalization coverage (by install count)</td><td class="c">&gt; 90%</td></tr>
 <tr><td>Discovery coverage vs CMDB / AD</td><td class="c">&gt; 95%</td></tr>
 <tr><td>Tier-1 publishers with validated ELP &lt; 30 days old</td><td class="c">100%</td></tr>
 <tr><td>Savings realized (reclaim + avoid + renewal reductions)</td><td class="c">Tracked in currency, YTD</td></tr>
 <tr><td>Requests fulfilled from reclaimed pool</td><td class="c">Rising %</td></tr>
 <tr><td>Audit evidence archive (ILMT reports etc.) current</td><td class="c">Yes, quarterly</td></tr>
+</tbody>
 </table></div>
 
 <h4>The renewal countdown (works for EA, ULA, Passport Advantage, big SaaS)</h4>
@@ -2728,7 +2803,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p11-math">11.1 Metric math on one screen</h3>
 <div class="scroll"><table>
-<tr><th>Calculation</th><th>Formula</th><th>Floors / gotchas</th></tr>
+<thead><tr><th scope="col">Calculation</th><th scope="col">Formula</th><th scope="col">Floors / gotchas</th></tr></thead>
+<tbody>
 <tr><td><span class="pill ms">Windows Server (per server)</span></td><td><code>MAX(16, Σ per CPU MAX(8, cores))</code></td><td>Std = 2 VMs per full set, stack for more; DC = unlimited VMs</td></tr>
 <tr><td><span class="pill ms">SQL Server (per VM)</span></td><td><code>MAX(4, vCPU)</code> core licenses</td><td>Mobility needs SA; host EE+SA = unlimited VMs</td></tr>
 <tr><td><span class="pill ms">SQL passive replicas</span></td><td>1 HA + 1 DR + 1 Azure DR free</td><td>Only with SA; strictly no workload on them</td></tr>
@@ -2740,11 +2816,13 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td><span class="pill ibm">IBM PVU sub-capacity</span></td><td><code>Σ MIN(VM vCPU, host cores) × PVU rate</code></td><td>Needs ILMT/accepted tool ≤90 days, quarterly reports, 2-yr retention</td></tr>
 <tr><td><span class="pill ibm">IBM PVU full capacity</span></td><td><code>all host cores × PVU rate</code></td><td>The default when evidence is missing</td></tr>
 <tr><td><span class="pill saas">M365 / SaaS</span></td><td>assigned vs active seats (30/60/90-day)</td><td>Leavers + tier oversize + overlap = the waste triangle</td></tr>
+</tbody>
 </table></div>
 
 <h4>Magic numbers: recite these cold and interviews get easy</h4>
 <div class="scroll"><table>
-<tr><th>Number</th><th>What it is</th><th>Publisher</th></tr>
+<thead><tr><th scope="col">Number</th><th scope="col">What it is</th><th scope="col">Publisher</th></tr></thead>
+<tbody>
 <tr><td class="c"><b>16 / 8 / 2</b></td><td>Min cores per server / per processor; sold in 2-core packs (Windows Server)</td><td><span class="pill ms">MS</span></td></tr>
 <tr><td class="c"><b>2 vs unlimited</b></td><td>VMs per Standard core-set vs Datacenter</td><td><span class="pill ms">MS</span></td></tr>
 <tr><td class="c"><b>4</b></td><td>Min SQL core licenses per VM or server</td><td><span class="pill ms">MS</span></td></tr>
@@ -2767,6 +2845,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <tr><td class="c"><b>0</b></td><td>MSUs that zIIP/IFL specialty-engine work adds to MLC charges</td><td><span class="pill ibm">IBM Z</span></td></tr>
 <tr><td class="c"><b>16 / 72</b></td><td>Broadcom VMware minimums: cores per CPU / cores per order</td><td><span class="pill">VMW</span></td></tr>
 <tr><td class="c"><b>9</b></td><td>Document types in SAP Digital Access licensing</td><td><span class="pill">SAP</span></td></tr>
+</tbody>
 </table></div>
 
 <h3 id="p11-cards">11.2 Publisher crib cards</h3>
@@ -2896,7 +2975,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 </main>
 </div>
-<button class="top" id="topBtn" title="Back to top">↑</button>
+<button type="button" class="top" id="topBtn" title="Back to top">↑</button>
 <script>
 (function(){
   var d=document, reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
