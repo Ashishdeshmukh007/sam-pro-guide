@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#07090e">
+<meta name="description" content="Free visual guide to ServiceNow SAM Pro — Microsoft, Oracle, IBM licensing deep dives, the reconciliation engine, audit defense, 8 case studies, 140 interview Q&A.">
+<link rel="canonical" href="https://ashishdeshmukh007.github.io/sam-pro-guide/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ServiceNow SAM Pro — Zero to Mastery">
+<meta property="og:description" content="Free visual guide to ServiceNow SAM Pro — Microsoft, Oracle, IBM licensing deep dives, the reconciliation engine, audit defense, 8 case studies, 140 interview Q&A.">
+<meta property="og:url" content="https://ashishdeshmukh007.github.io/sam-pro-guide/">
+<meta property="og:image" content="https://ashishdeshmukh007.github.io/sam-pro-guide/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <title>ServiceNow SAM Pro — Zero to Mastery (Visual Guide)</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📗</text></svg>">
 <style>
@@ -109,8 +117,13 @@ main{min-width:0;padding-bottom:100px}
   background:var(--panel);border:1px solid var(--line);border-radius:20px;
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow);
 }
-.toc h3{margin:16px 6px 6px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:700}
-.toc h3:first-child{margin-top:2px}
+.toc .toc-label{margin:16px 6px 6px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.toc details > .toc-label:first-of-type{margin-top:2px}
+.toc summary{cursor:pointer;font-family:var(--font-d);font-weight:700;font-size:.9rem;padding:6px 8px;list-style:none;border-radius:10px}
+.toc summary::-webkit-details-marker{display:none}
+.toc summary::before{content:"▸ ";color:var(--acc)}
+.toc details[open] summary::before{content:"▾ "}
+@media (min-width:981px){.toc summary{display:none}}
 .toc ol{list-style:none;margin:0;padding:0}
 .toc li{margin:2px 0}
 .toc a{
@@ -407,7 +420,7 @@ details.qa .a p{margin:.3em 0}
 .case .nums div{text-align:center}
 .case .nums b{display:block;font-size:1.2rem;font-family:var(--font-d);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .case .nums span{font-size:.72rem;color:var(--mut)}
-.case h5{margin:16px 0 5px;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mut);font-family:var(--font-d)}
+.case .klabel{margin:16px 0 5px;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mut);font-family:var(--font-d)}
 .case p,.case ul{font-size:.92rem;margin:.3em 0}
 /* ============ PILLS ============ */
 .pill{
@@ -502,34 +515,37 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <div class="wrap">
 
 <!-- ======================= TOC ======================= -->
-<nav class="toc" id="toc">
-  <h3>Zero → Mastery</h3>
+<nav class="toc" id="toc" aria-label="Table of contents">
+  <details id="tocD" open>
+  <summary>Contents</summary>
+  <div class="toc-label">Zero → Mastery</div>
   <ol>
     <li><a href="#start"><span class="n">◈</span> Start here: how to use this guide</a></li>
   </ol>
-  <h3>Foundations</h3>
+  <div class="toc-label">Foundations</div>
   <ol>
     <li><a href="#p1" data-part="p1"><span class="n">1</span> SAM fundamentals <span class="done-mark" hidden>✓</span></a></li>
     <li><a href="#p2" data-part="p2"><span class="n">2</span> ServiceNow platform &amp; SAM Pro <span class="done-mark" hidden>✓</span></a></li>
     <li><a href="#p3" data-part="p3"><span class="n">3</span> Architecture &amp; data model <span class="done-mark" hidden>✓</span></a></li>
     <li><a href="#p4" data-part="p4"><span class="n">4</span> Working the tool end-to-end <span class="done-mark" hidden>✓</span></a></li>
   </ol>
-  <h3>Tier-1 publishers</h3>
+  <div class="toc-label">Tier-1 publishers</div>
   <ol>
     <li><a href="#p5" data-part="p5"><span class="n">5</span> Microsoft deep dive <span class="done-mark" hidden>✓</span></a></li>
     <li><a href="#p6" data-part="p6"><span class="n">6</span> Oracle deep dive <span class="done-mark" hidden>✓</span></a></li>
     <li><a href="#p7" data-part="p7"><span class="n">7</span> IBM deep dive <span class="done-mark" hidden>✓</span></a></li>
   </ol>
-  <h3>Consulting practice</h3>
+  <div class="toc-label">Consulting practice</div>
   <ol>
     <li><a href="#p8" data-part="p8"><span class="n">8</span> SaaS, delivery &amp; audit defense <span class="done-mark" hidden>✓</span></a></li>
     <li><a href="#p9" data-part="p9"><span class="n">9</span> Case studies (8 real-world) <span class="done-mark" hidden>✓</span></a></li>
   </ol>
-  <h3>Interview mastery</h3>
+  <div class="toc-label">Interview mastery</div>
   <ol>
     <li><a href="#p10" data-part="p10"><span class="n">10</span> Interview strategy + 120 Q&amp;A <span class="done-mark" hidden>✓</span></a></li>
     <li><a href="#p11" data-part="p11"><span class="n">11</span> Cheat sheets, glossary, 90-day plan <span class="done-mark" hidden>✓</span></a></li>
   </ol>
+  </details>
   <button type="button" class="theme" id="themeBtn">◐ Toggle theme</button>
 </nav>
 
@@ -549,7 +565,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   </div>
   <div class="byline"><span class="av">AD</span><span>Created by <b>Ashish Deshmukh</b></span></div>
 
-  <h3 style="margin-top:10px">🗺️ Your learning path</h3>
+  <h2 style="margin-top:10px;font-size:1.17em">🗺️ Your learning path</h2>
   <div class="pipeline">
     <div class="st"><span class="ico">🌱</span><b>Parts 1–2</b><span>What SAM is + where SAM Pro lives in ServiceNow</span></div>
     <div class="ar">→</div>
@@ -2511,74 +2527,74 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <p class="lead">Composite, realistic engagements with numbers. Learn the <i>shape</i> of each story: they double as answers to almost every scenario question an interviewer can invent.</p>
 
 <div class="case ms"><div class="hd"><b>Case 1 · Global bank: SQL Server sprawl on VMware</b><span class="tag">MICROSOFT · COMPLIANCE</span></div><div class="bd">
-<h5>Situation</h5><p>60,000-employee bank, EA renewal in 9 months. DBAs had self-served SQL VMs for years across general-purpose VMware clusters with DRS enabled.</p>
-<h5>What SAM Pro showed</h5><p>vCenter topology + reconciliation revealed 412 SQL Enterprise VMs able to migrate across 38 unlicensed hosts. Licenses existed for ~320 dedicated cores; mobility rights partially lapsed with SA on a third of the estate.</p>
+<p class="klabel">Situation</p><p>60,000-employee bank, EA renewal in 9 months. DBAs had self-served SQL VMs for years across general-purpose VMware clusters with DRS enabled.</p>
+<p class="klabel">What SAM Pro showed</p><p>vCenter topology + reconciliation revealed 412 SQL Enterprise VMs able to migrate across 38 unlicensed hosts. Licenses existed for ~320 dedicated cores; mobility rights partially lapsed with SA on a third of the estate.</p>
 <div class="nums"><div><b>412</b><span>SQL EE VMs</span></div><div><b>$12.4M</b><span>worst-case exposure</span></div><div><b>$3.1M</b><span>final true-up</span></div><div><b>2</b><span>SQL-only clusters after fix</span></div></div>
-<h5>Resolution</h5><p>Pinned SQL to two dedicated clusters (host-affinity rules exported as evidence), renewed SA selectively for mobility, licensed the two clusters' full cores with Enterprise + SA for unlimited VMs, and used the tool's numbers to pre-empt the auditor at true-up.</p>
-<h5>Lessons</h5><ul><li>Virtualization topology is license data, not just infrastructure data.</li><li>Fix architecture before negotiating; the exposure you remove never gets invoiced.</li></ul>
+<p class="klabel">Resolution</p><p>Pinned SQL to two dedicated clusters (host-affinity rules exported as evidence), renewed SA selectively for mobility, licensed the two clusters' full cores with Enterprise + SA for unlimited VMs, and used the tool's numbers to pre-empt the auditor at true-up.</p>
+<p class="klabel">Lessons</p><ul><li>Virtualization topology is license data, not just infrastructure data.</li><li>Fix architecture before negotiating; the exposure you remove never gets invoiced.</li></ul>
 <p>🎤 <i>Use for: "Tell me about a complex compliance issue you resolved."</i></p>
 </div></div>
 
 <div class="case ms"><div class="hd"><b>Case 2 · Insurer: M365 right-sizing at 28,000 seats</b><span class="tag">MICROSOFT · SAVINGS</span></div><div class="bd">
-<h5>Situation</h5><p>Insurer paying for E5 org-wide "for security reasons"; CFO demanded proof the premium was used.</p>
-<h5>What SAM Pro showed</h5><p>The M365 connector's per-workload activity showed 4,100 accounts inactive 90+ days (leavers, contractors, service accounts) and 2,100 users touching no E5-only feature in six months.</p>
+<p class="klabel">Situation</p><p>Insurer paying for E5 org-wide "for security reasons"; CFO demanded proof the premium was used.</p>
+<p class="klabel">What SAM Pro showed</p><p>The M365 connector's per-workload activity showed 4,100 accounts inactive 90+ days (leavers, contractors, service accounts) and 2,100 users touching no E5-only feature in six months.</p>
 <div class="nums"><div><b>28,000</b><span>seats reviewed</span></div><div><b>4,100</b><span>inactive seats reclaimed</span></div><div><b>2,100</b><span>E5 → E3 downgrades</span></div><div><b>$2.4M/yr</b><span>run-rate saving</span></div></div>
-<h5>Resolution</h5><p>Joiner-leaver automation now unassigns licenses on departure; a monthly right-sizing review runs from the same dashboard; renewal negotiated on actual consumption bands.</p>
-<h5>Lessons</h5><ul><li>Subscription waste is a process failure (leavers), not a buying failure.</li><li>Usage evidence turns "security says everyone needs E5" into a measurable decision.</li></ul>
+<p class="klabel">Resolution</p><p>Joiner-leaver automation now unassigns licenses on departure; a monthly right-sizing review runs from the same dashboard; renewal negotiated on actual consumption bands.</p>
+<p class="klabel">Lessons</p><ul><li>Subscription waste is a process failure (leavers), not a buying failure.</li><li>Usage evidence turns "security says everyone needs E5" into a measurable decision.</li></ul>
 <p>🎤 <i>Use for: "How have you delivered savings?" (fast, concrete, verifiable)</i></p>
 </div></div>
 
 <div class="case ora"><div class="hd"><b>Case 3 · Retailer: the $30M VMware letter</b><span class="tag">ORACLE · AUDIT</span></div><div class="bd">
-<h5>Situation</h5><p>Oracle GLAS audit landed after a support reduction. Two EE databases lived on a 44-host shared vSphere estate.</p>
-<h5>What SAM Pro showed</h5><p>Its own count first: actual usage was 3 hosts' worth of processors, but under Oracle's soft-partitioning policy the claim spanned every host and every option installed (Partitioning + Diagnostics had feature-usage hits).</p>
+<p class="klabel">Situation</p><p>Oracle GLAS audit landed after a support reduction. Two EE databases lived on a 44-host shared vSphere estate.</p>
+<p class="klabel">What SAM Pro showed</p><p>Its own count first: actual usage was 3 hosts' worth of processors, but under Oracle's soft-partitioning policy the claim spanned every host and every option installed (Partitioning + Diagnostics had feature-usage hits).</p>
 <div class="nums"><div><b>$31M</b><span>opening claim</span></div><div><b>44 → 4</b><span>hosts in Oracle's reach after isolation</span></div><div><b>$3.8M</b><span>settlement as future ULA credit</span></div><div><b>0</b><span>findings accepted as written</span></div></div>
-<h5>Resolution</h5><p>Legal held that the partitioning policy was non-contractual; ops built a physically isolated 4-host Oracle cluster mid-audit with documented boundaries; accidental option usage was disabled with dated evidence. Settlement became credit toward products the roadmap needed anyway.</p>
-<h5>Lessons</h5><ul><li>Never accept policy documents as contract terms without challenge.</li><li>Isolation completed during the audit still shrinks the claim.</li></ul>
+<p class="klabel">Resolution</p><p>Legal held that the partitioning policy was non-contractual; ops built a physically isolated 4-host Oracle cluster mid-audit with documented boundaries; accidental option usage was disabled with dated evidence. Settlement became credit toward products the roadmap needed anyway.</p>
+<p class="klabel">Lessons</p><ul><li>Never accept policy documents as contract terms without challenge.</li><li>Isolation completed during the audit still shrinks the claim.</li></ul>
 <p>🎤 <i>Use for: "Walk me through defending a vendor audit."</i></p>
 </div></div>
 
 <div class="case ora"><div class="hd"><b>Case 4 · Manufacturer: Java's per-employee shock</b><span class="tag">ORACLE · JAVA</span></div><div class="bd">
-<h5>Situation</h5><p>Oracle emailed about Java download activity. Headcount: 45,000 including contractors. Quoted exposure at the per-employee metric: ~$4.5M per year, forever.</p>
-<h5>What SAM Pro showed</h5><p>Discovery found 3,900 Oracle JDK/JRE installs; all but one vendor application could run on OpenJDK.</p>
+<p class="klabel">Situation</p><p>Oracle emailed about Java download activity. Headcount: 45,000 including contractors. Quoted exposure at the per-employee metric: ~$4.5M per year, forever.</p>
+<p class="klabel">What SAM Pro showed</p><p>Discovery found 3,900 Oracle JDK/JRE installs; all but one vendor application could run on OpenJDK.</p>
 <div class="nums"><div><b>45,000</b><span>employees in metric</span></div><div><b>~$4.5M/yr</b><span>quoted exposure</span></div><div><b>96%</b><span>migrated to Temurin in 5 months</span></div><div><b>~$0.3M</b><span>one-time migration cost</span></div></div>
-<h5>Resolution</h5><p>Fleet-wide migration to an OpenJDK build via SCCM, the last vendor app covered by the vendor's own embedded-Java rights, uninstall evidence archived, and a polite letter documenting zero commercial Oracle Java use.</p>
-<h5>Lessons</h5><ul><li>Per-employee metrics make deployment counts irrelevant; only elimination or negotiation changes the bill.</li><li>Download logs are audit triggers; treat outreach as pre-audit and answer with evidence, not confessions.</li></ul>
+<p class="klabel">Resolution</p><p>Fleet-wide migration to an OpenJDK build via SCCM, the last vendor app covered by the vendor's own embedded-Java rights, uninstall evidence archived, and a polite letter documenting zero commercial Oracle Java use.</p>
+<p class="klabel">Lessons</p><ul><li>Per-employee metrics make deployment counts irrelevant; only elimination or negotiation changes the bill.</li><li>Download logs are audit triggers; treat outreach as pre-audit and answer with evidence, not confessions.</li></ul>
 <p>🎤 <i>Use for: "How do you handle a licensing model change?"</i></p>
 </div></div>
 
 <div class="case ibm"><div class="hd"><b>Case 5 · Telco: the ILMT gap that almost cost $18M</b><span class="tag">IBM · SUB-CAPACITY</span></div><div class="bd">
-<h5>Situation</h5><p>IBM audit (run by a Big-4 firm) at a telco with 2,300 servers running WebSphere, MQ and Db2 under sub-capacity licensing.</p>
-<h5>What SAM Pro showed</h5><p>Cross-referencing ILMT coverage against the CMDB: agents missing or silent on 184 eligible hosts, some for 14 months; quarterly reports never archived for two quarters after a datacenter migration.</p>
+<p class="klabel">Situation</p><p>IBM audit (run by a Big-4 firm) at a telco with 2,300 servers running WebSphere, MQ and Db2 under sub-capacity licensing.</p>
+<p class="klabel">What SAM Pro showed</p><p>Cross-referencing ILMT coverage against the CMDB: agents missing or silent on 184 eligible hosts, some for 14 months; quarterly reports never archived for two quarters after a datacenter migration.</p>
 <div class="nums"><div><b>184</b><span>hosts without evidence</span></div><div><b>$18M</b><span>full-capacity claim</span></div><div><b>$2.9M</b><span>settlement + S&amp;S commitment</span></div><div><b>100%</b><span>agent coverage now monitored</span></div></div>
-<h5>Resolution</h5><p>Rebuilt evidence where logs allowed, conceded genuinely unproven periods, demonstrated a now-healthy control (coverage dashboard reconciling ILMT vs CMDB weekly), and negotiated the balance into a committed renewal.</p>
-<h5>Lessons</h5><ul><li>Sub-capacity is a discount you re-earn every quarter with evidence.</li><li>Monitor the monitoring: ILMT agent health belongs on a dashboard, not in hope.</li></ul>
+<p class="klabel">Resolution</p><p>Rebuilt evidence where logs allowed, conceded genuinely unproven periods, demonstrated a now-healthy control (coverage dashboard reconciling ILMT vs CMDB weekly), and negotiated the balance into a committed renewal.</p>
+<p class="klabel">Lessons</p><ul><li>Sub-capacity is a discount you re-earn every quarter with evidence.</li><li>Monitor the monitoring: ILMT agent health belongs on a dashboard, not in hope.</li></ul>
 <p>🎤 <i>Use for: "What's unique about managing IBM?"</i></p>
 </div></div>
 
 <div class="case ibm"><div class="hd"><b>Case 6 · Bank: PVU → Cloud Pak conversion done sober</b><span class="tag">IBM · OPTIMIZATION</span></div><div class="bd">
-<h5>Situation</h5><p>IBM proposed converting legacy PVU entitlements to Cloud Pak for Integration VPCs "to simplify." Sales math showed savings; the SAM team was asked to verify.</p>
-<h5>What SAM Pro showed</h5><p>Reconciliation showed 30% of the PVU estate idle (candidates for retirement, not conversion) and modeled the product-specific conversion ratios against actual deployment, not IBM's assumed growth.</p>
+<p class="klabel">Situation</p><p>IBM proposed converting legacy PVU entitlements to Cloud Pak for Integration VPCs "to simplify." Sales math showed savings; the SAM team was asked to verify.</p>
+<p class="klabel">What SAM Pro showed</p><p>Reconciliation showed 30% of the PVU estate idle (candidates for retirement, not conversion) and modeled the product-specific conversion ratios against actual deployment, not IBM's assumed growth.</p>
 <div class="nums"><div><b>30%</b><span>PVUs idle pre-conversion</span></div><div><b>22%</b><span>lower committed spend vs proposal</span></div><div><b>2 yrs</b><span>containerization runway kept</span></div></div>
-<h5>Resolution</h5><p>Retired idle entitlements first, converted only actively used products, sized VPCs to measured consumption plus honest growth, and stood up IBM License Service on OpenShift before the first containerized deployment.</p>
-<h5>Lessons</h5><ul><li>Never convert waste; retire it, then convert.</li><li>Model vendor "simplification" offers in your own tool before signing.</li></ul>
+<p class="klabel">Resolution</p><p>Retired idle entitlements first, converted only actively used products, sized VPCs to measured consumption plus honest growth, and stood up IBM License Service on OpenShift before the first containerized deployment.</p>
+<p class="klabel">Lessons</p><ul><li>Never convert waste; retire it, then convert.</li><li>Model vendor "simplification" offers in your own tool before signing.</li></ul>
 <p>🎤 <i>Use for: "How does SAM add value beyond compliance?"</i></p>
 </div></div>
 
 <div class="case saas"><div class="hd"><b>Case 7 · Tech scale-up: 610 SaaS apps nobody approved</b><span class="tag">SAAS · SHADOW IT</span></div><div class="bd">
-<h5>Situation</h5><p>8,000-person company, engineering-led buying culture, finance seeing SaaS spend grow 35% yearly with no inventory.</p>
-<h5>What SAM Pro showed</h5><p>Spend detection on expense/AP data plus SSO sign-in evidence: 610 distinct SaaS products, three web-conferencing tools, four whiteboards, 23% of paid seats with no login in 90 days.</p>
+<p class="klabel">Situation</p><p>8,000-person company, engineering-led buying culture, finance seeing SaaS spend grow 35% yearly with no inventory.</p>
+<p class="klabel">What SAM Pro showed</p><p>Spend detection on expense/AP data plus SSO sign-in evidence: 610 distinct SaaS products, three web-conferencing tools, four whiteboards, 23% of paid seats with no login in 90 days.</p>
 <div class="nums"><div><b>610</b><span>SaaS apps found</span></div><div><b>~180</b><span>sanctioned after rationalization</span></div><div><b>23%</b><span>seats inactive</span></div><div><b>$1.8M/yr</b><span>saved in year one</span></div></div>
-<h5>Resolution</h5><p>App rationalization board using SAM Pro's overlap and usage views; auto-reclamation at 60 days idle for top-20 apps; new SaaS purchases routed through the catalog with entitlement checks.</p>
-<h5>Lessons</h5><ul><li>SaaS discovery is financial + identity data, not network scanning.</li><li>Governance sticks only when the request path is easier than the credit card.</li></ul>
+<p class="klabel">Resolution</p><p>App rationalization board using SAM Pro's overlap and usage views; auto-reclamation at 60 days idle for top-20 apps; new SaaS purchases routed through the catalog with entitlement checks.</p>
+<p class="klabel">Lessons</p><ul><li>SaaS discovery is financial + identity data, not network scanning.</li><li>Governance sticks only when the request path is easier than the credit card.</li></ul>
 <p>🎤 <i>Use for: "How would you manage SaaS sprawl?"</i></p>
 </div></div>
 
 <div class="case ora"><div class="hd"><b>Case 8 · Pharma: certifying a ULA at 4× value</b><span class="tag">ORACLE · ULA EXIT</span></div><div class="bd">
-<h5>Situation</h5><p>3-year database ULA expiring in 10 months; Oracle pushing renewal hard with audit undertones. Board wanted out of the treadmill.</p>
-<h5>What SAM Pro showed</h5><p>Continuous measurement of deployments per product across the term, including which planned projects would legitimately deploy before expiry, and which workloads sat in public cloud (risky to count at certification).</p>
+<p class="klabel">Situation</p><p>3-year database ULA expiring in 10 months; Oracle pushing renewal hard with audit undertones. Board wanted out of the treadmill.</p>
+<p class="klabel">What SAM Pro showed</p><p>Continuous measurement of deployments per product across the term, including which planned projects would legitimately deploy before expiry, and which workloads sat in public cloud (risky to count at certification).</p>
 <div class="nums"><div><b>10 mo</b><span>exit runway</span></div><div><b>4.2×</b><span>certified vs entry baseline</span></div><div><b>$9M</b><span>repurchase avoided</span></div><div><b>0</b><span>audit within 24 months after</span></div></div>
-<h5>Resolution</h5><p>Accelerated legitimate planned deployments onto on-prem clusters before expiry, documented counts per the certification clause, moved cloud-hosted instances into scope where the contract allowed (and excluded where it did not), filed a defensible certification letter, and declined renewal.</p>
-<h5>Lessons</h5><ul><li>A ULA is a banking opportunity with a deadline; passive customers certify low and repurchase later.</li><li>Read the certification clause at signing time, not exit time.</li></ul>
+<p class="klabel">Resolution</p><p>Accelerated legitimate planned deployments onto on-prem clusters before expiry, documented counts per the certification clause, moved cloud-hosted instances into scope where the contract allowed (and excluded where it did not), filed a defensible certification letter, and declined renewal.</p>
+<p class="klabel">Lessons</p><ul><li>A ULA is a banking opportunity with a deadline; passive customers certify low and repurchase later.</li><li>Read the certification clause at signing time, not exit time.</li></ul>
 <p>🎤 <i>Use for: "Describe a strategic licensing decision you influenced."</i></p>
 </div></div>
 
@@ -2611,7 +2627,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p10-bank">10.3 The question bank</h3>
 <div class="qa-tools">
-  <input id="qaSearch" type="search" placeholder="🔍 Filter 120+ questions… (e.g. PVU, workbench, true-up)">
+  <input id="qaSearch" type="search" aria-label="Filter interview questions" placeholder="🔍 Filter 120+ questions… (e.g. PVU, workbench, true-up)">
   <button id="qaExpand" type="button">Expand all</button>
   <button id="qaCollapse" type="button">Collapse all (quiz mode)</button>
   <span class="small mut" id="qaCount"></span>
@@ -3079,6 +3095,10 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   });
   paint();
 })();
+</script>
+<script>
+(function(){var d=document.getElementById('tocD'),m=matchMedia('(max-width:980px)');
+function f(){d.open=!m.matches}f();m.addEventListener('change',f);})();
 </script>
 </body>
 </html>
