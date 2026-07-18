@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ashishdeshmukh007.github.io/sam-pro-guide/sitemap.xml

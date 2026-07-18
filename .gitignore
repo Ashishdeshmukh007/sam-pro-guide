@@ -1,0 +1,5 @@
+# local tooling noise
+node_modules/
+.DS_Store
+*.report.json
+lighthouse/
