@@ -1,8 +1,8 @@
 # Production Status — SAM Pro Zero-to-Mastery Guide
 
 Tier: A-static (confirmed 2026-07-18 — public free content site, no accounts/payments/user data; human answered scope batch)
-Current phase: content research (background) + phases 2/6/7 in-file work
-Next task: integrate research corrections; self-host fonts; meta/OG; heading order; mobile TOC; deploy script
+Current phase: 9 — Launch gate (all phases complete)
+Next task: post-launch loop (quarterly re-verify of licensing facts; re-run currency audit)
 
 ## Gate evidence
 - Phase 1 (2026-07-18): CI = html-validate@11.5.6 + check.py (dup ids, anchor targets, node --check JS).
@@ -12,6 +12,16 @@ Next task: integrate research corrections; self-host fonts; meta/OG; heading ord
 - Phase 2 (2026-07-18): self-hosted Inter+Sora as inline variable WOFF2 data URIs. Browser check: `document.fonts` both "loaded", `performance.getEntriesByType('resource')` external = **[]** (zero third-party requests). Only remaining dep removed.
 - Phase 7 (2026-07-18): heading-order violations **6→0** (browser walk of h1–h6: `orderViolations: []`); h5 count 32→0 (→p.klabel); meta description + OG/Twitter present; og.png 1200×630 resolves. Mobile (390px): TOC collapses under `<details>` (`tocOpenOnMobile:false`), desktop always-open (`tocOpenDesktop:true`). Screenshotted both.
 - Phase 6 (2026-07-18): deploy.sh gate→push→sync. **Rollback drill:** `git revert --no-edit HEAD` → gate re-ran green → `git reset --hard c5cd849` restored. Rollback command for Pages = `git revert HEAD && git push origin main`. CI green on all main pushes (runs 2965462xxxx).
+- **Content fact-audit (2026-07-18)** — the "deep research" gate. 30-agent workflow (extract→verify→adversarial→synth); stopped at 80% for speed with 8/9 verify agents complete. Tally: **230 claims confirmed, 25 stale, 14 wrong, 33 unverifiable**. Integrated **23 corrections** (self-reviewed as adversary; only clean, single-source-locatable, well-cited fixes applied) + a dated 2025–26 landscape callout (`#verified`). Key fixes: ServiceNow plugin `com.snc.samp`, entitlements `alm_license` (×4), roles, Oracle-verified-since-2022; IBM PVU tiering + IPAA-v11 exemption withdrawal + CMP→TFP; MS WS2025/EA-2025; VMware 72-core withdrawal + 20% penalty; Oracle GCP + JDK NFTC; RVTools supply-chain caution; SQL passive-backup rights; PTC token model. Raw research + full correction list in `/private/tmp/.../scratchpad/` (ephemeral) — canonical record is this ledger + git history.
+  - **Skipped (logged):** Java case-study $4.5M "quoted exposure" (plausible as Oracle opener; guide's own tier table shows $2.84M — left as-is, labeled "quoted"); Adobe ETLA true-down (wrong claim not locatable in guide text); Power Apps "2 apps" crossover (string not present). 33 unverifiable claims retained unchanged.
+
+## Phase 9 — Launch gate (2026-07-18)
+- CI green on main (html-validate + check.py) every push. ✓
+- No secrets / zero third-party runtime requests (fonts self-hosted). ✓
+- Lighthouse live (mobile): A11y 100 · Best-Practices 100 · SEO 100 · Agentic 100, 0 fails. ✓
+- Rollback proven; deploy.sh syncs reading copy. ✓
+- Content re-verified against vendor sources this session; currency stamp live. ✓
+- N/A at this tier (logged, not skipped silently): billing, auth, backups-beyond-git, uptime/error tracking, load test (105KB static on GH Pages CDN).
 
 ## Inventory
 - **App:** single-file static HTML learning guide (`index.html`, 3,003 lines, 339KB raw / 105KB gzipped). Inline CSS + vanilla JS. No build step, no framework, no JS deps.
