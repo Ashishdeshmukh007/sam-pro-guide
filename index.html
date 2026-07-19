@@ -170,6 +170,10 @@ main{min-width:0;padding-bottom:100px}
   animation:none;width:auto;height:auto;
 }
 @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(46px,34px) scale(1.12)}}
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .part-head::after{transform:scaleX(0);transform-origin:left;animation:drawline linear both;animation-timeline:view();animation-range:entry 8% cover 20%}
+}}
+@keyframes drawline{to{transform:scaleX(1)}}
 @media (prefers-reduced-motion:no-preference){@supports (animation-timeline:scroll()){
   .hero .fx .grid{animation:heroPar linear both;animation-timeline:scroll(root);animation-range:0 640px}
 }}
@@ -305,7 +309,9 @@ main{min-width:0;padding-bottom:100px}
   font-family:var(--font-d);font-size:3rem;font-weight:800;line-height:1;
   background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 4px 18px rgba(25,223,168,.35));
+  position:relative;padding-right:2px;
 }
+.part-head .pn::after{content:"/11";font-family:var(--font-m);font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:.04em;margin-left:5px;-webkit-text-fill-color:var(--mut)}
 .part-head h2{margin:0;font-size:clamp(1.4rem,2.4vw,1.8rem);line-height:1.15;font-weight:700}
 .part-head .done-box{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:.76rem;color:var(--mut);white-space:nowrap;cursor:pointer;user-select:none}
 .part-head .done-box input{accent-color:var(--acc);width:15px;height:15px}
