@@ -171,6 +171,28 @@ main{min-width:0;padding-bottom:100px}
 }
 @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(46px,34px) scale(1.12)}}
 .hero>*{position:relative;z-index:1}
+/* ============ CINEMATIC MOTION ============ */
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .5s ease;background:radial-gradient(440px circle at var(--mx,50%) var(--my,12%),rgba(25,223,168,.14),transparent 62%);mix-blend-mode:screen}
+.hero:hover::after{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  .hero .zero,.hero .elp,.hero .elp-cap,.hero .strip,.hero .byline{animation:rise .9s cubic-bezier(.2,.8,.2,1) backwards}
+  .hero h1,.hero .sub{animation:slidein .9s cubic-bezier(.2,.8,.2,1) backwards}
+  .hero .zero{animation-delay:.05s}
+  .hero h1{animation-delay:.10s}
+  .hero .sub{animation-delay:.20s}
+  .hero .elp{animation-delay:.40s}
+  .hero .elp-cap{animation-delay:.54s}
+  .hero .strip{animation-delay:.62s}
+  .hero .byline{animation-delay:.70s}
+  .hero .fx .o1{animation:drift 22s ease-in-out infinite alternate,hueshift 19s linear infinite}
+  .hero .fx .o2{animation:drift 26s ease-in-out -6s infinite alternate-reverse,hueshift 24s linear infinite}
+  .hero .fx .o3{animation:drift 30s ease-in-out -12s infinite alternate,hueshift 29s linear infinite}
+  .elp-bar>i{transform:scaleX(0);transform-origin:left;animation:fillbar 1.25s .5s cubic-bezier(.2,.85,.2,1) forwards}
+}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}}
+@keyframes slidein{from{transform:translateY(20px)}}
+@keyframes hueshift{to{filter:blur(70px) hue-rotate(360deg)}}
+@keyframes fillbar{to{transform:scaleX(1)}}
 .hero h1{
   margin:0 0 12px;font-size:clamp(2.3rem,4.6vw,3.4rem);line-height:1.04;font-weight:800;
   background:linear-gradient(100deg,var(--ink) 30%,var(--acc) 78%,var(--acc2));
@@ -3105,23 +3127,35 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
     },{rootMargin:'-12% 0px -70% 0px'});
     [].forEach.call(d.querySelectorAll('section.part'),function(s){spy.observe(s);});
   }
-  /* ---- animated counters in hero stats ---- */
+  /* ---- count-up the ELP figures (fixed-grid cells, no layout shift) ---- */
   function countUp(el){
-    var m=el.textContent.match(/^(\d+)(.*)$/); if(!m) return;
-    var target=+m[1], suffix=m[2], t0=null, dur=1100;
-    function step(ts){
-      if(!t0) t0=ts;
-      var p=Math.min(1,(ts-t0)/dur), e=1-Math.pow(1-p,3);
-      el.textContent=Math.round(target*e)+suffix;
-      if(p<1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+    var raw=el.textContent.trim(), m=raw.match(/^([+\-]?)([\d,]+)(\D*)$/); if(!m) return;
+    var sign=m[1], target=+m[2].replace(/,/g,''), suffix=m[3], t0=null, dur=1250;
+    if(!target){return;}
+    function fmt(n){return n.toLocaleString('en-US');}
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur), e=1-Math.pow(1-p,3);
+      el.textContent=sign+fmt(Math.round(target*e))+suffix; if(p<1)requestAnimationFrame(step); }
+    el.textContent=sign+'0'+suffix; requestAnimationFrame(step);
   }
   if(!reduced && 'IntersectionObserver' in window){
     var cio=new IntersectionObserver(function(entries){
       entries.forEach(function(en){ if(en.isIntersecting){ countUp(en.target); cio.unobserve(en.target);} });
-    },{threshold:.5});
-    [].forEach.call(d.querySelectorAll('.hero .stat b'),function(b){cio.observe(b);});
+    },{threshold:.6});
+    [].forEach.call(d.querySelectorAll('.elp-v'),function(b){cio.observe(b);});
+  }
+  /* ---- cursor spotlight on the hero ---- */
+  var hero=d.querySelector('.hero');
+  if(hero && !reduced && 'PointerEvent' in window){
+    var praf=0;
+    hero.addEventListener('pointermove',function(e){
+      if(praf) return;
+      praf=requestAnimationFrame(function(){
+        var r=hero.getBoundingClientRect();
+        hero.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+        hero.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+        praf=0;
+      });
+    },{passive:true});
   }
   /* ---- Q&A tools ---- */
   var qas=[].slice.call(d.querySelectorAll('details.qa'));
