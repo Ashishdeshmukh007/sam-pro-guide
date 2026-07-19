@@ -145,7 +145,7 @@ main{min-width:0;padding-bottom:100px}
   .toc{position:static;max-height:none;margin-bottom:6px}
 }
 /* ============ REVEAL SYSTEM ============ */
-.pre{opacity:0;transform:translateY(18px)}
+.pre{opacity:0;transform:translateY(18px) scale(.986)}
 .pre.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.85,.25,1)}
 @media (prefers-reduced-motion:reduce){
   .pre{opacity:1!important;transform:none!important;transition:none!important}
@@ -170,6 +170,10 @@ main{min-width:0;padding-bottom:100px}
   animation:none;width:auto;height:auto;
 }
 @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(46px,34px) scale(1.12)}}
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:scroll()){
+  .hero .fx .grid{animation:heroPar linear both;animation-timeline:scroll(root);animation-range:0 640px}
+}}
+@keyframes heroPar{to{transform:translateY(70px);opacity:.15}}
 .hero>*{position:relative;z-index:1}
 /* ============ CINEMATIC MOTION ============ */
 .hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .5s ease;background:radial-gradient(440px circle at var(--mx,50%) var(--my,12%),rgba(25,223,168,.14),transparent 62%);mix-blend-mode:screen}
@@ -311,6 +315,9 @@ h4{font-size:1.02rem;margin:26px 0 10px;font-weight:700}
   position:relative;
 }
 .card:hover{transform:translateY(-4px);border-color:rgba(25,223,168,.38);box-shadow:var(--glow)}
+.card::after{content:"";position:absolute;inset:0;z-index:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s ease;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(25,223,168,.10),transparent 60%)}
+.card:hover::after{opacity:1}
+.card>*{position:relative;z-index:1}
 .card .ico{
   font-size:1.15rem;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;margin-bottom:10px;
   border-radius:12px;background:linear-gradient(135deg,rgba(25,223,168,.16),rgba(34,211,238,.1));
@@ -3199,6 +3206,21 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
         hero.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
         hero.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
         praf=0;
+      });
+    },{passive:true});
+  }
+  /* ---- cursor-follow glow on cards (delegated, throttled) ---- */
+  if(!reduced && 'PointerEvent' in window){
+    var gcard=null, graf=0, gx=0, gy=0;
+    d.addEventListener('pointermove',function(e){
+      var c=e.target.closest?e.target.closest('.card'):null;
+      if(!c){gcard=null;return;} gcard=c; gx=e.clientX; gy=e.clientY;
+      if(graf) return;
+      graf=requestAnimationFrame(function(){
+        graf=0; if(!gcard) return;
+        var r=gcard.getBoundingClientRect();
+        gcard.style.setProperty('--mx',((gx-r.left)/r.width*100).toFixed(1)+'%');
+        gcard.style.setProperty('--my',((gy-r.top)/r.height*100).toFixed(1)+'%');
       });
     },{passive:true});
   }
