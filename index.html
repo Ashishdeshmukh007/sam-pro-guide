@@ -249,6 +249,18 @@ main{min-width:0;padding-bottom:100px}
 .masthead b{color:var(--acc);font-weight:700;letter-spacing:.12em}
 .masthead .mrule{flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent);min-width:20px}
 .masthead .mno{letter-spacing:.14em;white-space:nowrap}
+@media (max-width:600px){.masthead{flex-wrap:wrap;gap:6px 10px}.masthead .mrule{display:none}.masthead .mno{white-space:normal}}
+/* ============ FULL-VIEWPORT COVER ============ */
+.cover{position:relative;z-index:1;min-height:calc(100svh - 66px);display:flex;flex-direction:column;justify-content:center}
+.cover h1{font-size:clamp(2.7rem,5.6vw,4.15rem)}
+.cover .sub{font-size:1.14rem}
+.scrollcue{display:inline-flex;align-items:center;gap:11px;margin-top:30px;align-self:flex-start;color:var(--mut);font:700 .64rem var(--font-d);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:color .3s}
+.scrollcue:hover{color:var(--acc)}
+.scrollcue .mouse{width:20px;height:32px;border:1.5px solid var(--line2);border-radius:11px;position:relative;flex:none;transition:border-color .3s}
+.scrollcue:hover .mouse{border-color:var(--acc)}
+.scrollcue .mouse::before{content:"";position:absolute;left:50%;top:6px;width:3px;height:6px;border-radius:2px;background:var(--acc)}
+@media (prefers-reduced-motion:no-preference){.scrollcue .mouse::before{animation:scrolldot 1.8s ease-in-out infinite}}
+@keyframes scrolldot{0%,100%{opacity:.3;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,8px)}}
 /* ============ RECONCILIATION ENGINE (hero visual) ============ */
 .engine{position:relative;overflow:hidden;margin:26px 0 12px;padding:20px 22px 22px;border-radius:20px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}
 .engine::before{content:"";position:absolute;inset:0;z-index:0;opacity:.6;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:26px 26px;-webkit-mask-image:radial-gradient(130% 100% at 50% 0,#000,transparent 78%);mask-image:radial-gradient(130% 100% at 50% 0,#000,transparent 78%)}
@@ -646,6 +658,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <!-- ======================= HERO ======================= -->
 <header class="hero" id="start">
   <div class="fx"><i class="grid"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>
+  <div class="cover">
   <div class="masthead"><b>SAM·PRO</b> Field Guide <span class="mrule"></span> <span class="mno">№ 01–11 · ZERO→MASTERY</span></div>
   <h1>ServiceNow SAM Pro</h1>
   <p class="sub">Everything a SAM consultant needs: how the tool works, how to run it end-to-end, and how to master <b>Microsoft, Oracle and IBM</b> licensing inside it. Explained visually, with real-world case studies and a full interview question bank.</p>
@@ -678,7 +691,9 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
     </div>
   </div>
   <p class="elp-cap">Too few licenses and an <b>audit bites</b>; too many and <b>budget bleeds</b>. Everything here is how SAM Pro counts both sides — and defends that number.</p>
-  <div class="strip">
+  <a href="#learn" class="scrollcue"><span class="mouse"></span> Scroll to begin</a>
+  </div><!-- /cover -->
+  <div class="strip" id="learn">
     <span><b>11</b> parts</span>
     <span><b>3</b> publisher deep dives</span>
     <span><b>8</b> case studies</span>
