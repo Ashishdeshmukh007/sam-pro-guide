@@ -42,6 +42,7 @@
   --r:18px;
   --font-d:"Sora",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-b:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --font-m:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
 }
 :root[data-theme="light"]{
   --bg0:#eef1f5; --bg1:#f7f9fb;
@@ -73,10 +74,9 @@ body{
 body::before{ /* aurora field */
   content:"";position:fixed;inset:-20% -10%;z-index:-2;pointer-events:none;
   background:
-    radial-gradient(42% 34% at 12% 6%,rgba(25,223,168,.14),transparent 60%),
-    radial-gradient(38% 30% at 88% 12%,rgba(34,211,238,.12),transparent 60%),
-    radial-gradient(46% 40% at 78% 86%,rgba(125,143,255,.1),transparent 65%),
-    radial-gradient(34% 30% at 8% 78%,rgba(185,139,255,.08),transparent 60%),
+    radial-gradient(42% 34% at 12% 6%,rgba(25,223,168,.10),transparent 62%),
+    radial-gradient(38% 30% at 88% 12%,rgba(34,211,238,.07),transparent 62%),
+    radial-gradient(46% 40% at 78% 86%,rgba(125,143,255,.06),transparent 66%),
     var(--bg0);
 }
 :root[data-theme="light"] body::before{
@@ -87,7 +87,7 @@ body::before{ /* aurora field */
     var(--bg0);
 }
 body::after{ /* grain */
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.03;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
 }
 ::selection{background:rgba(25,223,168,.32);color:inherit}
@@ -132,7 +132,7 @@ main{min-width:0;padding-bottom:100px}
 }
 .toc a:hover{background:var(--panel2);text-decoration:none;transform:translateX(2px)}
 .toc a.act{background:linear-gradient(90deg,rgba(25,223,168,.16),rgba(34,211,238,.07));border-color:rgba(25,223,168,.35)}
-.toc .n{font-family:var(--font-d);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;font-size:.8rem;min-width:1.5em}
+.toc .n{font-family:var(--font-m);color:var(--acc);font-weight:800;font-size:.78rem;min-width:1.6em;font-variant-numeric:tabular-nums}
 .toc .done-mark{margin-left:auto;color:var(--good);font-weight:800}
 .toc .theme{
   margin-top:18px;width:100%;padding:9px;border-radius:12px;border:1px solid var(--line2);
@@ -196,6 +196,28 @@ main{min-width:0;padding-bottom:100px}
 .stat:hover{transform:translateY(-3px);border-color:rgba(25,223,168,.4);box-shadow:var(--glow)}
 .stat b{display:block;font-family:var(--font-d);font-size:1.7rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
 .stat span{font-size:.78rem;color:var(--mut)}
+/* ============ ELP SIGNATURE (hero thesis) ============ */
+.elp{margin:28px 0 12px;padding:18px 22px 20px;border-radius:20px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}
+.elp-head{font:700 .63rem/1 var(--font-d);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.elp-head span{color:var(--mut);letter-spacing:0;text-transform:none;font:500 .8rem var(--font-b)}
+.elp-body{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:end;gap:10px;margin-top:16px}
+.elp-col{display:flex;flex-direction:column;gap:7px;text-align:center;padding:0 4px}
+.elp-k{font:700 .61rem var(--font-d);letter-spacing:.15em;text-transform:uppercase;color:var(--mut)}
+.elp-v{font:800 2.2rem/1 var(--font-m);letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}
+.elp-col.pos .elp-v{color:var(--good)}
+.elp-l{font-size:.7rem;color:var(--mut)}
+.elp-bar{height:6px;border-radius:99px;background:var(--panel2);overflow:hidden}
+.elp-bar>i{display:block;height:100%;border-radius:99px;background:var(--grad)}
+.elp-col.use .elp-bar>i{background:linear-gradient(92deg,var(--acc2),var(--acc))}
+.elp-badge{align-self:center;font:700 .58rem var(--font-d);letter-spacing:.1em;text-transform:uppercase;color:var(--good);background:var(--good-soft);border:1px solid var(--good);border-radius:99px;padding:3px 11px}
+.elp-op{font:400 1.25rem var(--font-m);color:var(--mut);padding-bottom:9px}
+.elp-cap{font-size:.98rem;color:var(--mut);max-width:72ch;margin:0 0 4px}
+.elp-cap b{color:var(--ink)}
+@media (max-width:640px){.elp-body{grid-template-columns:1fr;gap:16px}.elp-op{display:none}}
+/* compact stat strip */
+.strip{display:flex;flex-wrap:wrap;gap:9px 22px;margin:2px 0 24px;padding:13px 2px 0;border-top:1px solid var(--line)}
+.strip span{font-size:.82rem;color:var(--mut)}
+.strip b{font-family:var(--font-m);font-weight:700;color:var(--acc);font-size:.94rem;margin-right:4px;font-variant-numeric:tabular-nums}
 /* ============ PART HEADERS ============ */
 .part{margin:74px 0 0;scroll-margin-top:24px}
 .part-head{position:relative;display:flex;align-items:center;gap:18px;padding-bottom:16px;margin-bottom:10px}
@@ -246,7 +268,7 @@ h4{font-size:1.02rem;margin:26px 0 10px;font-weight:700}
 .pipeline .st:hover{transform:translateY(-3px);border-color:rgba(25,223,168,.4);box-shadow:var(--glow)}
 .pipeline .st b{display:block;font-size:.92rem;font-family:var(--font-d)}
 .pipeline .st span{font-size:.76rem;color:var(--mut);display:block;margin-top:4px;line-height:1.4}
-.pipeline .st .ico{font-size:1.35rem;display:block;margin-bottom:3px}
+.pipeline .st .ico{display:inline-block;font:800 .7rem var(--font-m);letter-spacing:.06em;color:var(--acc);border:1px solid var(--line2);border-radius:8px;padding:2px 9px;margin-bottom:9px;font-variant-numeric:tabular-nums}
 .pipeline .ar{
   align-self:center;font-weight:800;font-size:1.25rem;padding:0 2px;
   background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
@@ -392,7 +414,7 @@ details.qa[open]{border-color:rgba(25,223,168,.4);box-shadow:var(--glow)}
 details.qa summary{
   cursor:pointer;padding:14px 16px;font-weight:600;font-size:.94rem;list-style:none;display:flex;gap:11px;align-items:baseline;
 }
-details.qa summary::before{content:"▸";background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+details.qa summary::before{content:"▸";background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;transition:transform .25s cubic-bezier(.22,1,.36,1)}
 details.qa[open] summary::before{transform:rotate(90deg)}
 details.qa summary::-webkit-details-marker{display:none}
 details.qa .a{padding:12px 16px 15px 36px;font-size:.9rem;border-top:1px dashed var(--line2);animation:qaIn .35s ease}
@@ -556,26 +578,51 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <span class="zero">ZERO → MASTERY · VISUAL GUIDE</span>
   <h1>ServiceNow SAM Pro</h1>
   <p class="sub">Everything a SAM consultant needs: how the tool works, how to run it end-to-end, and how to master <b>Microsoft, Oracle and IBM</b> licensing inside it. Explained visually, with real-world case studies and a full interview question bank.</p>
-  <div class="stats">
-    <div class="stat"><b>11</b><span>parts, zero → master</span></div>
-    <div class="stat"><b>3</b><span>Tier-1 publisher deep dives</span></div>
-    <div class="stat"><b>8</b><span>real-world case studies</span></div>
-    <div class="stat"><b>140</b><span>interview Q&amp;A with answers</span></div>
-    <div class="stat"><b>85+</b><span>diagrams &amp; worked calculations</span></div>
+  <div class="elp">
+    <div class="elp-head">Effective License Position <span>— the one number SAM Pro exists to defend</span></div>
+    <div class="elp-body">
+      <div class="elp-col own">
+        <span class="elp-k">Entitled</span>
+        <span class="elp-v">1,240</span>
+        <div class="elp-bar"><i style="width:100%"></i></div>
+        <span class="elp-l">licenses owned</span>
+      </div>
+      <div class="elp-op">⇄</div>
+      <div class="elp-col use">
+        <span class="elp-k">Consumed</span>
+        <span class="elp-v">1,190</span>
+        <div class="elp-bar"><i style="width:96%"></i></div>
+        <span class="elp-l">licenses in use</span>
+      </div>
+      <div class="elp-op">=</div>
+      <div class="elp-col pos">
+        <span class="elp-k">Position</span>
+        <span class="elp-v">+50</span>
+        <span class="elp-badge">compliant</span>
+      </div>
+    </div>
+  </div>
+  <p class="elp-cap">Too few licenses and an <b>audit bites</b>; too many and <b>budget bleeds</b>. Everything here is how SAM Pro counts both sides — and defends that number.</p>
+  <div class="strip">
+    <span><b>11</b> parts</span>
+    <span><b>3</b> publisher deep dives</span>
+    <span><b>8</b> case studies</span>
+    <span><b>140</b> interview Q&amp;A</span>
+    <span><b>85+</b> diagrams</span>
   </div>
   <div class="byline"><span class="av">AD</span><span>Created by <b>Ashish Deshmukh</b></span></div>
 
-  <h2 style="margin-top:10px;font-size:1.17em">🗺️ Your learning path</h2>
+  <h2 style="margin-top:10px;font-size:1.17em">Your learning path</h2>
   <div class="pipeline">
-    <div class="st"><span class="ico">🌱</span><b>Parts 1–2</b><span>What SAM is + where SAM Pro lives in ServiceNow</span></div>
+    <div class="st"><span class="ico">01</span><b>Parts 1–2</b><span>What SAM is + where SAM Pro lives in ServiceNow</span></div>
     <div class="ar">→</div>
-    <div class="st"><span class="ico">⚙️</span><b>Parts 3–4</b><span>How the engine works + hands-on operation</span></div>
+    <div class="st"><span class="ico">02</span><b>Parts 3–4</b><span>How the engine works + hands-on operation</span></div>
     <div class="ar">→</div>
-    <div class="st"><span class="ico">🏢</span><b>Parts 5–7</b><span>Microsoft, Oracle, IBM licensing mastery</span></div>
+    <div class="st"><span class="ico">03</span><b>Parts 5–7</b><span>Microsoft, Oracle, IBM licensing mastery</span></div>
     <div class="ar">→</div>
-    <div class="st"><span class="ico">💼</span><b>Parts 8–9</b><span>Delivery method + case studies</span></div>
+    <div class="st"><span class="ico">04</span><b>Parts 8–9</b><span>Delivery method + case studies</span></div>
     <div class="ar">→</div>
-    <div class="st"><span class="ico">🎤</span><b>Parts 10–11</b><span>Interview mastery + cheat sheets</span></div>
+    <div class="st"><span class="ico">05</span><b>Parts 10–11</b><span>Interview mastery + cheat sheets</span></div>
   </div>
 
   <div class="cards w">
