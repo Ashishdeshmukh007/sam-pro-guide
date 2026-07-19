@@ -240,6 +240,47 @@ main{min-width:0;padding-bottom:100px}
 .strip{display:flex;flex-wrap:wrap;gap:9px 22px;margin:2px 0 24px;padding:13px 2px 0;border-top:1px solid var(--line)}
 .strip span{font-size:.82rem;color:var(--mut)}
 .strip b{font-family:var(--font-m);font-weight:700;color:var(--acc);font-size:.94rem;margin-right:4px;font-variant-numeric:tabular-nums}
+/* ============ LEDGER MASTHEAD ============ */
+.masthead{display:flex;align-items:center;gap:12px;margin:0 0 18px;font:700 .66rem var(--font-m);letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.masthead b{color:var(--acc);font-weight:700;letter-spacing:.12em}
+.masthead .mrule{flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent);min-width:20px}
+.masthead .mno{letter-spacing:.14em;white-space:nowrap}
+/* ============ RECONCILIATION ENGINE (hero visual) ============ */
+.engine{position:relative;overflow:hidden;margin:26px 0 12px;padding:20px 22px 22px;border-radius:20px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}
+.engine::before{content:"";position:absolute;inset:0;z-index:0;opacity:.6;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:26px 26px;-webkit-mask-image:radial-gradient(130% 100% at 50% 0,#000,transparent 78%);mask-image:radial-gradient(130% 100% at 50% 0,#000,transparent 78%)}
+.eng-head{position:relative;z-index:1;display:flex;align-items:center;gap:10px;font:700 .62rem var(--font-d);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:18px}
+.eng-head .live{display:inline-flex;align-items:center;gap:6px;color:var(--acc);font-family:var(--font-m);letter-spacing:.12em}
+.eng-head .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc);animation:pulse 2s ease-in-out infinite}
+.eng-flow{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto 1fr auto 1.3fr auto 1fr;align-items:stretch;gap:2px}
+.eng-node{min-width:0;display:flex;flex-direction:column;gap:6px;text-align:center;justify-content:center;padding:10px 8px;border-radius:14px}
+.eng-node .eng-k{font:700 .58rem var(--font-d);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.eng-node .eng-v{font:800 1.9rem/1 var(--font-m);letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.eng-node .eng-l{font-size:.67rem;color:var(--mut);line-height:1.3}
+.eng-node.core{background:linear-gradient(180deg,rgba(25,223,168,.09),transparent 90%);border:1px solid rgba(25,223,168,.28)}
+.eng-node.core .eng-swap{font:700 .9rem var(--font-m);color:var(--mut);display:flex;gap:7px;align-items:baseline;justify-content:center;flex-wrap:wrap}
+.eng-node.core .eng-swap b{color:var(--ink)} .eng-node.core .eng-swap i{color:var(--acc);font-style:normal;font-size:1.05rem}
+.eng-node.out .eng-v{color:var(--good)}
+.eng-badge{align-self:center;font:700 .55rem var(--font-d);letter-spacing:.1em;text-transform:uppercase;color:var(--good);background:var(--good-soft);border:1px solid var(--good);border-radius:99px;padding:3px 10px}
+.eng-pipe{align-self:center;position:relative;height:2px;min-width:26px;background:var(--line2);border-radius:2px}
+.eng-pipe i{position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc);transform:translate(-50%,-50%);opacity:0}
+@media (prefers-reduced-motion:no-preference){
+  .eng-flow .eng-pipe:nth-child(2) i{animation:flowH 2.4s cubic-bezier(.5,0,.5,1) infinite}
+  .eng-flow .eng-pipe:nth-child(4) i{animation:flowH 2.4s cubic-bezier(.5,0,.5,1) .5s infinite}
+  .eng-flow .eng-pipe:nth-child(6) i{animation:flowH 2.4s cubic-bezier(.5,0,.5,1) 1s infinite}
+}
+@keyframes flowH{0%{left:0;opacity:0}12%{opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
+@media (max-width:720px){
+  .eng-flow{grid-template-columns:1fr;gap:0}
+  .eng-pipe{width:2px;height:24px;min-width:0;justify-self:center;margin:3px 0}
+  .eng-pipe i{left:50%;top:0}
+  .eng-node{padding:8px}
+}
+@media (max-width:720px) and (prefers-reduced-motion:no-preference){
+  .eng-flow .eng-pipe:nth-child(2) i{animation:flowV 2.4s cubic-bezier(.5,0,.5,1) infinite}
+  .eng-flow .eng-pipe:nth-child(4) i{animation:flowV 2.4s cubic-bezier(.5,0,.5,1) .5s infinite}
+  .eng-flow .eng-pipe:nth-child(6) i{animation:flowV 2.4s cubic-bezier(.5,0,.5,1) 1s infinite}
+}
+@keyframes flowV{0%{top:0;opacity:0}12%{opacity:1}85%{opacity:1}100%{top:100%;opacity:0}}
 /* ============ PART HEADERS ============ */
 .part{margin:74px 0 0;scroll-margin-top:24px}
 .part-head{position:relative;display:flex;align-items:center;gap:18px;padding-bottom:16px;margin-bottom:10px}
@@ -598,30 +639,34 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <!-- ======================= HERO ======================= -->
 <header class="hero" id="start">
   <div class="fx"><i class="grid"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>
-  <span class="zero">ZERO → MASTERY · VISUAL GUIDE</span>
+  <div class="masthead"><b>SAM·PRO</b> Field Guide <span class="mrule"></span> <span class="mno">№ 01–11 · ZERO→MASTERY</span></div>
   <h1>ServiceNow SAM Pro</h1>
   <p class="sub">Everything a SAM consultant needs: how the tool works, how to run it end-to-end, and how to master <b>Microsoft, Oracle and IBM</b> licensing inside it. Explained visually, with real-world case studies and a full interview question bank.</p>
-  <div class="elp">
-    <div class="elp-head">Effective License Position <span>— the one number SAM Pro exists to defend</span></div>
-    <div class="elp-body">
-      <div class="elp-col own">
-        <span class="elp-k">Entitled</span>
-        <span class="elp-v">1,240</span>
-        <div class="elp-bar"><i style="width:100%"></i></div>
-        <span class="elp-l">licenses owned</span>
+  <div class="engine" role="img" aria-label="How SAM Pro turns raw discovery into the Effective License Position">
+    <div class="eng-head">The reconciliation engine <span class="live">live</span></div>
+    <div class="eng-flow">
+      <div class="eng-node">
+        <span class="eng-k">Discovered</span>
+        <span class="eng-v" data-to="3412">3,412</span>
+        <span class="eng-l">installs found</span>
       </div>
-      <div class="elp-op">⇄</div>
-      <div class="elp-col use">
-        <span class="elp-k">Consumed</span>
-        <span class="elp-v">1,190</span>
-        <div class="elp-bar"><i style="width:96%"></i></div>
-        <span class="elp-l">licenses in use</span>
+      <div class="eng-pipe"><i></i></div>
+      <div class="eng-node">
+        <span class="eng-k">Normalized</span>
+        <span class="eng-v" data-to="98" data-suffix="%">98%</span>
+        <span class="eng-l">matched to products</span>
       </div>
-      <div class="elp-op">=</div>
-      <div class="elp-col pos">
-        <span class="elp-k">Position</span>
-        <span class="elp-v">+50</span>
-        <span class="elp-badge">compliant</span>
+      <div class="eng-pipe"><i></i></div>
+      <div class="eng-node core">
+        <span class="eng-k">Reconcile</span>
+        <span class="eng-swap"><b>1,190</b> used <i>⇄</i> <b>1,240</b> owned</span>
+        <span class="eng-l">metric math + use rights</span>
+      </div>
+      <div class="eng-pipe"><i></i></div>
+      <div class="eng-node out">
+        <span class="eng-k">Position</span>
+        <span class="eng-v" data-to="50" data-sign="+">+50</span>
+        <span class="eng-badge">compliant</span>
       </div>
     </div>
   </div>
@@ -3130,9 +3175,8 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   }
   /* ---- count-up the ELP figures (fixed-grid cells, no layout shift) ---- */
   function countUp(el){
-    var raw=el.textContent.trim(), m=raw.match(/^([+\-]?)([\d,]+)(\D*)$/); if(!m) return;
-    var sign=m[1], target=+m[2].replace(/,/g,''), suffix=m[3], t0=null, dur=1250;
-    if(!target){return;}
+    var target=+el.getAttribute('data-to'); if(isNaN(target)) return;
+    var sign=el.getAttribute('data-sign')||'', suffix=el.getAttribute('data-suffix')||'', t0=null, dur=1350;
     function fmt(n){return n.toLocaleString('en-US');}
     function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur), e=1-Math.pow(1-p,3);
       el.textContent=sign+fmt(Math.round(target*e))+suffix; if(p<1)requestAnimationFrame(step); }
@@ -3142,7 +3186,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
     var cio=new IntersectionObserver(function(entries){
       entries.forEach(function(en){ if(en.isIntersecting){ countUp(en.target); cio.unobserve(en.target);} });
     },{threshold:.6});
-    [].forEach.call(d.querySelectorAll('.elp-v'),function(b){cio.observe(b);});
+    [].forEach.call(d.querySelectorAll('.eng-v[data-to]'),function(b){cio.observe(b);});
   }
   /* ---- cursor spotlight on the hero ---- */
   var hero=d.querySelector('.hero');
