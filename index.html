@@ -380,6 +380,12 @@ h4{font-size:1.02rem;margin:26px 0 10px;font-weight:700}
 .flow b.t{display:block;margin-bottom:3px;font-family:var(--font-d);font-size:.98rem}
 .flow .d{font-size:.9rem;color:var(--mut);max-width:72ch}
 .flow .d b,.flow .d code{color:var(--ink)}
+/* .drawn: the connecting spine draws itself as the step scrolls through view.
+   Native scroll-driven animation — no JS, no observer. Unsupported browsers keep a static line. */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .flow.drawn>li::after{transform:scaleY(0);transform-origin:top;animation:drawlineV linear both;animation-timeline:view();animation-range:entry 25% cover 35%}
+}}
+@keyframes drawlineV{to{transform:scaleY(1)}}
 /* ============ CALLOUTS ============ */
 .co{
   display:flex;gap:14px;margin:20px 0;padding:16px 18px;border-radius:16px;
@@ -447,6 +453,51 @@ td.c,th.c{text-align:center}
 @keyframes hotpulse{0%,100%{opacity:1}50%{opacity:.55}}
 .srv.bad{border-color:rgba(255,100,112,.55);background:linear-gradient(180deg,var(--bad-soft),transparent 80%),var(--panel-solid)}
 .srv.ok{border-color:rgba(52,217,138,.5)}
+/* ---- beat racks: one visual, several scenarios (6.5 partitioning, 7.2 sub-capacity) ---- */
+.beatbar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 12px}
+.beatb{
+  font:600 .72rem/1 var(--font-d);letter-spacing:.05em;cursor:pointer;padding:8px 13px;border-radius:999px;
+  border:1px solid var(--line2);background:var(--panel2);color:var(--mut);transition:color .2s,border-color .2s,background .2s;
+}
+.beatb:hover{color:var(--ink)}
+.beatb[aria-pressed="true"]{color:var(--ora);border-color:var(--ora);background:var(--ora-soft)}
+.rk-vm .cores i{background:var(--panel2);border:1px solid var(--line);box-shadow:none;transition:background .45s ease,box-shadow .45s ease}
+.rk-vm[data-beat="2"] .cores i,
+.rk-vm[data-beat="1"] .srv:first-child .cores i:nth-child(-n+2),
+.rk-vm[data-beat="3"] .srv:first-child .cores i:nth-child(-n+2),
+.rk-sc[data-beat="lapsed"] .srv.ok .cores i{
+  background:linear-gradient(135deg,#ff6470,#ff8a5c);border-color:transparent;box-shadow:0 0 9px -1px rgba(255,100,112,.7);
+  animation:hotpulse 2.6s ease-in-out infinite;
+}
+.rk-vm[data-beat="1"] .srv:not(:first-child),.rk-vm[data-beat="3"] .srv:not(:first-child){border-color:var(--line2);background:var(--panel)}
+/* equal widths so swapping beat captions can't reflow the rack onto two rows */
+.rk-vm .srv{flex:1 1 158px}
+.rk .srv{transition:border-color .45s ease,background .45s ease}
+.rk .cores i{transition:background .45s ease,box-shadow .45s ease}
+/* 7.2: the sub-capacity panel reverts to a full-capacity bill when the evidence lapses */
+.rk-sc[data-beat="lapsed"] .srv.ok{border-color:rgba(255,100,112,.55);background:linear-gradient(180deg,var(--bad-soft),transparent 80%),var(--panel-solid)}
+.rk .wlapsed{display:none}
+.rk[data-beat="lapsed"] .wok{display:none}
+.rk[data-beat="lapsed"] .wlapsed{display:block}
+.rk[data-beat="ok"] .bl.wok{display:block}
+.rk .beatsum .n1,.rk .beatsum .n2,.rk .beatsum .n3{display:none}
+.rk[data-beat="1"] .beatsum .n1,.rk[data-beat="2"] .beatsum .n2,.rk[data-beat="3"] .beatsum .n3{display:inline}
+.rk .bx,.rk[data-beat="2"] .b2{display:block}
+.rk .b2,.rk[data-beat="2"] .bx{display:none}
+.rk .lgx{display:flex}
+.rk .lg2{display:none}
+.rk[data-beat="2"] .lg2{display:flex}
+.rk[data-beat="2"] .lgx{display:none}
+.beatout{margin-top:14px}
+.bl{display:none;margin:0;font-size:.9rem;color:var(--mut);max-width:72ch}
+.rk[data-beat="1"] .b1,.rk[data-beat="2"] .b2.bl,.rk[data-beat="3"] .b3{display:block}
+.beatsum{
+  margin-top:10px;display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:7px;
+  padding:9px 15px;border-radius:12px;border:1px solid var(--line2);background:var(--panel2);
+  font-size:.86rem;font-family:var(--font-d);
+}
+.beatsum .n{font-size:1.2rem;color:var(--ora);font-variant-numeric:tabular-nums}
+.beatsum .x{color:var(--mut)}
 .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--mut);margin:8px 0}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-1px;margin-right:6px}
 /* ============ COMPARE BARS ============ */
@@ -473,6 +524,14 @@ td.c,th.c{text-align:center}
   padding:2.5px 9px;display:inline-block;margin-bottom:7px;font-weight:800;font-family:var(--font-d);
 }
 .tl .ph ul{margin:6px 0 0;padding-left:16px;font-size:.8rem;color:var(--mut)}
+/* .drawn: each phase's accent bar fills as that phase scrolls in, so the row reads as progress.
+   Reuses the existing drawline keyframe; native scroll-driven, no JS, degrades to a static bar. */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  /* the bar must ride a timeline named on the card: .ph is overflow:hidden, so a plain view()
+     on the pseudo-element would resolve against .ph's own (never-scrolling) box and sit at 100% */
+  .tl.drawn .ph{view-timeline-name:--phbar}
+  .tl.drawn .ph::before{transform:scaleX(0);transform-origin:left;animation:drawline linear both;animation-timeline:--phbar;animation-range:entry 30% cover 30%}
+}}
 /* ============ Q&A ============ */
 .qa-tools{
   position:sticky;top:10px;z-index:5;display:flex;flex-wrap:wrap;gap:9px;margin:18px 0;align-items:center;
@@ -554,6 +613,29 @@ details.qa .a p{margin:.3em 0}
 .arch .node:hover{border-color:var(--line2);transform:translateY(-1px)}
 .arch .node.acc{border-color:rgba(25,223,168,.45);background:linear-gradient(135deg,rgba(25,223,168,.13),rgba(34,211,238,.06));font-weight:600;box-shadow:0 0 18px -8px rgba(25,223,168,.4)}
 .arch .node code{font-size:.72rem}
+.archhint{margin:14px 0 8px}
+.archkeys{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 4px}
+.archkey{
+  font:600 .72rem/1 var(--font-d);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+  padding:7px 12px;border-radius:999px;border:1px solid var(--line2);background:var(--panel2);color:var(--mut);
+  transition:color .2s,border-color .2s,background .2s;
+}
+.archkey::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:-1px;background:currentColor}
+.archkey:hover{color:var(--ink)}
+.k-norm[aria-pressed="true"]{color:var(--acc);border-color:var(--acc);background:rgba(25,223,168,.1)}
+.k-sub[aria-pressed="true"]{color:var(--ibm);border-color:var(--ibm);background:var(--ibm-soft)}
+.k-opt[aria-pressed="true"]{color:var(--saas);border-color:var(--saas);background:var(--saas-soft)}
+.archwrap{position:relative}
+.archlinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible}
+.archwrap .arch .node{position:relative;z-index:1;transition:border-color .2s,transform .2s,opacity .25s}
+.al{fill:none;stroke-width:2;stroke-linecap:round;opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:opacity .2s ease,stroke-dashoffset .55s ease}
+.al-norm{stroke:var(--acc)}
+.al-sub{stroke:var(--ibm)}
+.al-opt{stroke:var(--saas)}
+.archwrap.islit .arch .node:not(.lit){opacity:.3}
+.archwrap.islit .arch .node.lit{border-color:var(--line2);box-shadow:var(--shadow)}
+.archwrap.lit-norm .al-norm,.archwrap.lit-sub .al-sub,.archwrap.lit-opt .al-opt{opacity:.95;stroke-dashoffset:0}
+@media (prefers-reduced-motion:reduce){.al{transition:opacity .2s ease;stroke-dashoffset:0}}
 /* ============ GLOSSARY & MISC ============ */
 .gl dt{font-weight:700;margin-top:13px;font-family:var(--font-d);font-size:.92rem}
 .gl dd{margin:2px 0 0;color:var(--mut);font-size:.9rem;max-width:75ch}
@@ -1047,32 +1129,41 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <p><b>Reconciliation skips what normalization did not recognize.</b> If only 60% of installs are normalized, your "compliance position" describes 60% of reality. This is why normalization coverage (target <b>&gt;85–90%</b>) is the first KPI every experienced consultant checks, before trusting any dashboard.</p></div></div>
 
 <h3 id="p3-arch">3.2 Full architecture on one screen</h3>
+<p class="small mut archhint">Hover any box — or pick a path below — to trace how data actually moves left to right.</p>
+<div class="archkeys">
+  <button type="button" class="archkey k-norm" data-chain="norm" aria-pressed="false">Normalize &amp; reconcile</button>
+  <button type="button" class="archkey k-sub" data-chain="sub" aria-pressed="false">IBM sub-capacity</button>
+  <button type="button" class="archkey k-opt" data-chain="opt" aria-pressed="false">Optimize &amp; reclaim</button>
+</div>
+<div class="archwrap">
+<svg class="archlinks" aria-hidden="true" focusable="false"></svg>
 <div class="arch">
   <div class="col"><b>1 · Data sources</b>
-    <div class="node">📡 ServiceNow Discovery<br><span class="small mut">agentless scans via MID Server</span></div>
-    <div class="node">🗂️ SCCM / MECM connector</div>
-    <div class="node">📱 Intune · Jamf</div>
-    <div class="node">🔵 ILMT / BigFix (IBM)</div>
-    <div class="node">🌐 vCenter topology (hosts, clusters)</div>
-    <div class="node">☁️ SaaS APIs · SSO (Okta, Entra ID)</div>
+    <div class="node" data-n="disc">📡 ServiceNow Discovery<br><span class="small mut">agentless scans via MID Server</span></div>
+    <div class="node" data-n="sccm">🗂️ SCCM / MECM connector</div>
+    <div class="node" data-n="intune">📱 Intune · Jamf</div>
+    <div class="node" data-n="ilmt">🔵 ILMT / BigFix (IBM)</div>
+    <div class="node" data-n="vcenter">🌐 vCenter topology (hosts, clusters)</div>
+    <div class="node" data-n="saas">☁️ SaaS APIs · SSO (Okta, Entra ID)</div>
   </div>
   <div class="col"><b>2 · Platform data</b>
-    <div class="node">💻 CIs: <code>cmdb_ci_computer</code>, VMs, clusters</div>
-    <div class="node acc">📀 Installs: <code>cmdb_sam_sw_install</code></div>
-    <div class="node acc">🏷️ Discovery models: <code>cmdb_sam_sw_discovery_model</code></div>
-    <div class="node">⏱️ Usage records (metering, last used)</div>
+    <div class="node" data-n="ci">💻 CIs: <code>cmdb_ci_computer</code>, VMs, clusters</div>
+    <div class="node acc" data-n="install">📀 Installs: <code>cmdb_sam_sw_install</code></div>
+    <div class="node acc" data-n="dmodel">🏷️ Discovery models: <code>cmdb_sam_sw_discovery_model</code></div>
+    <div class="node" data-n="usage">⏱️ Usage records (metering, last used)</div>
   </div>
   <div class="col"><b>3 · SAM Pro engines</b>
-    <div class="node acc">🧠 Normalization<br><span class="small mut">+ weekly Content Library sync</span></div>
-    <div class="node acc">⚖️ Reconciliation engine<br><span class="small mut">metric calculators + use rights</span></div>
-    <div class="node acc">📉 Optimization<br><span class="small mut">reclamation rules, remediation options</span></div>
+    <div class="node acc" data-n="norm">🧠 Normalization<br><span class="small mut">+ weekly Content Library sync</span></div>
+    <div class="node acc" data-n="recon">⚖️ Reconciliation engine<br><span class="small mut">metric calculators + use rights</span></div>
+    <div class="node acc" data-n="opt">📉 Optimization<br><span class="small mut">reclamation rules, remediation options</span></div>
   </div>
   <div class="col"><b>4 · Outcomes</b>
-    <div class="node">📊 Compliance dashboards / ELP</div>
-    <div class="node">🧰 License Workbench (validate &amp; defend)</div>
-    <div class="node">🔁 Reclamation &amp; request workflows</div>
-    <div class="node">💬 Renewal / true-up numbers</div>
+    <div class="node" data-n="dash">📊 Compliance dashboards / ELP</div>
+    <div class="node" data-n="wb">🧰 License Workbench (validate &amp; defend)</div>
+    <div class="node" data-n="reclaim">🔁 Reclamation &amp; request workflows</div>
+    <div class="node" data-n="renew">💬 Renewal / true-up numbers</div>
   </div>
+</div>
 </div>
 
 <h3 id="p3-model">3.3 The data model: four records to rule them all</h3>
@@ -1192,17 +1283,13 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p3-order">3.10 Under the hood: reconciliation's order of operations</h3>
 <p>The engine is a greedy optimizer trying to <b>minimize unlicensed installs</b> while burning the least-flexible entitlements first. Understanding the order lets you predict (and defend) every number it produces:</p>
-<div class="pipeline">
-  <div class="st"><b>1 · Scope</b><span>Software models of the selected publisher(s) with normalized consumption</span></div>
-  <div class="ar">→</div>
-  <div class="st"><b>2 · Aggregate consumption</b><span>Dedup installs per device; per-user metrics roll up by assigned user; infra metrics join CI cores/clusters</span></div>
-  <div class="ar">→</div>
-  <div class="st"><b>3 · Sort entitlements</b><span>Condition-restricted &amp; version-locked first, downgrade-flexible next, unlimited/enterprise last</span></div>
-  <div class="ar">→</div>
-  <div class="st"><b>4 · Allocate</b><span>Match consumption to rights, applying suites, down/upgrade rights, mobility flags</span></div>
-  <div class="ar">→</div>
-  <div class="st"><b>5 · Emit</b><span>Per-model result + per-install license state + remediation options + true-up cost</span></div>
-</div>
+<ol class="flow drawn">
+  <li><b class="t">Scope</b><div class="d">Software models of the selected publisher(s) with normalized consumption</div></li>
+  <li><b class="t">Aggregate consumption</b><div class="d">Dedup installs per device; per-user metrics roll up by assigned user; infra metrics join CI cores/clusters</div></li>
+  <li><b class="t">Sort entitlements</b><div class="d">Condition-restricted &amp; version-locked first, downgrade-flexible next, unlimited/enterprise last</div></li>
+  <li><b class="t">Allocate</b><div class="d">Match consumption to rights, applying suites, down/upgrade rights, mobility flags</div></li>
+  <li><b class="t">Emit</b><div class="d">Per-model result + per-install license state + remediation options + true-up cost</div></li>
+</ol>
 <div class="scroll"><table>
 <thead><tr><th scope="col">Engine behavior</th><th scope="col">Why it is designed that way</th><th scope="col">What you should check</th></tr></thead>
 <tbody>
@@ -1905,13 +1992,27 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <div class="card"><span class="ico">🌊</span><b>Soft partitioning (NOT accepted)</b><p>VMware, Hyper-V and friends. Oracle's policy: the VM <i>could</i> run anywhere, so license <b>everywhere it could run</b>.</p></div>
 </div>
 <h4>The blast radius, visualized</h4>
-<div class="rack">
-  <div class="srv bad"><div class="t">Host 1</div><div class="cores"><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i></div><div class="small center">1 Oracle VM here</div></div>
-  <div class="srv bad"><div class="t">Host 2</div><div class="cores"><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i></div><div class="small center">no Oracle, still exposed</div></div>
-  <div class="srv bad"><div class="t">Host 3</div><div class="cores"><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i></div><div class="small center">no Oracle, still exposed</div></div>
-  <div class="srv bad"><div class="t">Host 4</div><div class="cores"><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i></div><div class="small center">no Oracle, still exposed</div></div>
+<div class="rk rk-vm" data-beat="2" data-play="1,2,3">
+<div class="beatbar">
+  <button type="button" class="beatb" data-beat="1" aria-pressed="false">1 · Where it actually runs</button>
+  <button type="button" class="beatb" data-beat="2" aria-pressed="true">2 · Soft partitioning (VMware)</button>
+  <button type="button" class="beatb" data-beat="3" aria-pressed="false">3 · Hard partitioning</button>
 </div>
-<div class="legend"><span><i style="background:var(--bad)"></i>cores Oracle claims must be licensed (per its policy, where the VM can migrate)</span></div>
+<div class="rack">
+  <div class="srv bad"><div class="t">Host 1</div><div class="cores"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="small center">1 Oracle VM here</div></div>
+  <div class="srv bad"><div class="t">Host 2</div><div class="cores"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="small center b2">no Oracle, still exposed</div><div class="small center bx">no Oracle — outside the boundary</div></div>
+  <div class="srv bad"><div class="t">Host 3</div><div class="cores"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="small center b2">no Oracle, still exposed</div><div class="small center bx">no Oracle — outside the boundary</div></div>
+  <div class="srv bad"><div class="t">Host 4</div><div class="cores"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="small center b2">no Oracle, still exposed</div><div class="small center bx">no Oracle — outside the boundary</div></div>
+</div>
+<div class="legend lg2"><span><i style="background:var(--bad)"></i>cores Oracle claims must be licensed (per its policy, where the VM can migrate)</span></div>
+<div class="legend lgx"><span><i style="background:var(--bad)"></i>cores that must be licensed in this scenario</span></div>
+<div class="beatout">
+  <p class="bl b1">The VM uses <b>2 cores</b> on one host. That is what actually runs.</p>
+  <p class="bl b2">Oracle's policy: the VM <i>could</i> run anywhere in the cluster, so every core is claimed.</p>
+  <p class="bl b3">Physically capped: only the capped cores are licensable, and the claim stops at the boundary.</p>
+  <div class="beatsum"><b class="n"><span class="n1">2</span><span class="n2">32</span><span class="n3">2</span></b> cores claimed <span class="x">×</span> <b>0.5</b> core factor <span class="x">=</span> <b class="n"><span class="n1">1</span><span class="n2">16</span><span class="n3">1</span></b> Processor licenses</div>
+</div>
+</div>
 <ul>
   <li>Oracle's position has extended to entire clusters, and with modern vSphere's cross-vCenter migration, arguably further. The partitioning policy is <b>a policy document, not your contract</b>; that is both a risk (aggressive claims) and a defense (negotiable).</li>
   <li><b>Standard defense:</b> dedicated, physically isolated Oracle clusters (separate hosts, ideally separate vCenter and storage), documented migration boundaries, and DRS host-affinity evidence retained.</li>
@@ -2190,6 +2291,11 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <p class="small mut">Always confirm against IBM's current PVU table per chip model; these values are for intuition and interview math.</p>
 
 <h3 id="p7-subcap">7.2 Full capacity vs sub-capacity: the money concept</h3>
+<div class="rk rk-sc" data-beat="ok" data-play="ok,lapsed,ok">
+<div class="beatbar">
+  <button type="button" class="beatb" data-beat="ok" aria-pressed="true">ILMT healthy &amp; reporting</button>
+  <button type="button" class="beatb" data-beat="lapsed" aria-pressed="false">ILMT lapsed — no evidence</button>
+</div>
 <div class="rack">
   <div class="srv bad"><div class="t">FULL CAPACITY</div>
     <div class="socket"><div class="lbl">Host: 32 cores total</div><div class="cores"><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i><i class="hot"></i></div></div>
@@ -2197,8 +2303,14 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   </div>
   <div class="srv ok"><div class="t">SUB-CAPACITY</div>
     <div class="socket"><div class="lbl">Same host, VM uses 8 vCPU</div><div class="cores"><i></i><i></i><i></i><i></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i></div></div>
-    <div class="small center">License <b>only the VM's 8 cores</b><br>8 × 70 = <b>560 PVU</b> (capped at full capacity)</div>
+    <div class="small center wok">License <b>only the VM's 8 cores</b><br>8 × 70 = <b>560 PVU</b> (capped at full capacity)</div>
+    <div class="small center wlapsed">No proof of VM size → <b>billed at full capacity</b><br>32 × 70 = <b>2,240 PVU</b></div>
   </div>
+</div>
+<div class="beatout">
+  <p class="bl wok">The right is earned continuously: the tool is deployed, collecting, and reporting quarterly.</p>
+  <p class="bl wlapsed">Stop proving it and the discount does not just pause — IBM bills the whole host for the unproven period.</p>
+</div>
 </div>
 <p>Sub-capacity is a <b>75% discount</b> in this example. IBM grants it only if you continuously prove VM sizes with an approved tool. No evidence = IBM bills the whole host (or cluster), historically for the entire unproven period.</p>
 <h4>The eligibility contract (memorize all four)</h4>
@@ -2589,7 +2701,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 
 <h3 id="p8-method">8.2 Implementation methodology (how engagements actually run)</h3>
 <p>ServiceNow's prescriptive delivery framework is <b>Now Create</b>; SAM implementations follow its phases with SAM-specific content:</p>
-<div class="tl">
+<div class="tl drawn">
   <div class="ph"><span class="w">INITIATE</span><b>Weeks 1–2</b><ul><li>Stakeholders &amp; goals</li><li>Publisher priorities (risk × spend)</li><li>Data source inventory</li><li>Maturity assessment</li></ul></div>
   <div class="ph"><span class="w">PLAN</span><b>Weeks 2–4</b><ul><li>Workshops: metrics, processes, integrations</li><li>CMDB/discovery gap analysis</li><li>Entitlement collection kickoff (3–5 yrs history)</li></ul></div>
   <div class="ph"><span class="w">EXECUTE</span><b>Weeks 4–10</b><ul><li>Connect sources (SCCM, ILMT, M365, vCenter)</li><li>Normalization to &gt;85–90%</li><li>Load entitlements, configure metrics</li><li>First publisher reconciliation</li></ul></div>
@@ -3063,7 +3175,7 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 </div>
 
 <h3 id="p11-90">11.5 Your first 90 days on a SAM Pro project</h3>
-<div class="tl">
+<div class="tl drawn">
   <div class="ph"><span class="w">DAYS 1–30</span><b>Earn the map</b><ul><li>Read contracts &amp; last ELPs</li><li>Audit data health: coverage, normalization, connector jobs</li><li>Meet the 5 stakeholders</li><li>Shadow the request &amp; reclamation queues</li></ul></div>
   <div class="ph"><span class="w">DAYS 31–60</span><b>Own one publisher</b><ul><li>Rebuild its ELP with fresh data</li><li>Validate in License Workbench</li><li>Fix top-20 normalization gaps</li><li>Draft remediation plan with owners</li></ul></div>
   <div class="ph"><span class="w">DAYS 61–90</span><b>Deliver a visible win</b><ul><li>One reclamation wave, savings in currency</li><li>Publish position pack + KPI scorecard</li><li>Stand up the quarterly rhythm</li><li>Propose next publisher wave</li></ul></div>
@@ -3282,6 +3394,136 @@ footer{margin:90px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <script>
 (function(){var d=document.getElementById('tocD'),m=matchMedia('(max-width:980px)');
 function f(){d.open=!m.matches}f();m.addEventListener('change',f);})();
+</script>
+<script>
+/* ---- 3.2 architecture: hover-traced data paths ---- */
+(function(){
+  var wrap=document.querySelector('.archwrap');
+  if(!wrap) return;
+  var svg=wrap.querySelector('.archlinks'), NS='http://www.w3.org/2000/svg';
+  /* each chain is an ordered list of edges through the four columns */
+  var CHAINS={
+    norm:[['disc','install'],['sccm','install'],['intune','install'],['install','dmodel'],['dmodel','norm'],['norm','recon'],['recon','dash']],
+    sub:[['ilmt','install'],['vcenter','ci'],['ci','recon'],['recon','wb']],
+    opt:[['saas','usage'],['disc','usage'],['usage','opt'],['opt','reclaim'],['opt','renew']]
+  };
+  var node={}, members={};   /* members: node id -> chains it belongs to */
+  [].forEach.call(wrap.querySelectorAll('.node[data-n]'),function(el){node[el.dataset.n]=el;});
+  Object.keys(CHAINS).forEach(function(c){
+    CHAINS[c].forEach(function(e){
+      e.forEach(function(id){ (members[id]=members[id]||[]).indexOf(c)<0 && members[id].push(c); });
+    });
+  });
+
+  /* geometry is rect-based, not offsetLeft: the scroll-reveal puts a transform on .arch .col,
+     which promotes each column to offsetParent and makes offsets column-local. */
+  function box(el,origin){
+    var r=el.getBoundingClientRect();
+    return {x:r.left-origin.left, y:r.top-origin.top, w:r.width, h:r.height};
+  }
+  function draw(){
+    var o=wrap.getBoundingClientRect();
+    if(!o.width||!o.height) return;
+    svg.setAttribute('viewBox','0 0 '+o.width+' '+o.height);
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    /* the grid auto-fits; once it wraps below four columns the stages no longer read
+       left-to-right and the connectors sweep backwards, so drop to highlight-only */
+    var xs={};
+    [].forEach.call(wrap.querySelectorAll('.arch .col'),function(c){xs[Math.round(c.getBoundingClientRect().left)]=1;});
+    svg.style.display=Object.keys(xs).length<4?'none':'';
+    if(svg.style.display==='none') return;
+    Object.keys(CHAINS).forEach(function(c){
+      CHAINS[c].forEach(function(e){
+        var a=node[e[0]], b=node[e[1]];
+        if(!a||!b) return;
+        var A=box(a,o), B=box(b,o), gap=B.x-(A.x+A.w), p;
+        if(gap>20){                                   /* neighbouring columns: horizontal S-curve */
+          var x1=A.x+A.w, y1=A.y+A.h/2, x2=B.x, y2=B.y+B.h/2, dx=Math.max(10,gap*0.45);
+          p='M'+x1+' '+y1+'C'+(x1+dx)+' '+y1+','+(x2-dx)+' '+y2+','+x2+' '+y2;
+        }else{                                        /* same column (or wrapped): vertical hop */
+          var vx1=A.x+A.w/2, vy1=A.y+A.h, vx2=B.x+B.w/2, vy2=B.y, dy=(vy2-vy1)*0.5;
+          p='M'+vx1+' '+vy1+'C'+vx1+' '+(vy1+dy)+','+vx2+' '+(vy2-dy)+','+vx2+' '+vy2;
+        }
+        var path=document.createElementNS(NS,'path');
+        path.setAttribute('d',p);
+        path.setAttribute('pathLength','1');          /* lets the draw-in run without measuring */
+        path.setAttribute('class','al al-'+c);
+        svg.appendChild(path);
+      });
+    });
+  }
+
+  var lastKey='';
+  function light(chains){
+    var key=chains.slice().sort().join(',');
+    if(key===lastKey) return;
+    lastKey=key;
+    if(chains.length) draw();   /* re-measure at reveal time; also restarts the draw-in */
+    wrap.classList.toggle('islit',!!chains.length);
+    Object.keys(CHAINS).forEach(function(c){ wrap.classList.toggle('lit-'+c,chains.indexOf(c)>=0); });
+    [].forEach.call(wrap.querySelectorAll('.node[data-n]'),function(el){
+      var on=(members[el.dataset.n]||[]).some(function(c){return chains.indexOf(c)>=0;});
+      el.classList.toggle('lit',on);
+    });
+  }
+
+  var pinned=null;
+  function apply(){ light(pinned?[pinned]:[]); }
+  wrap.addEventListener('mouseover',function(ev){
+    var el=ev.target.closest&&ev.target.closest('.node[data-n]');
+    if(el&&members[el.dataset.n]) light(members[el.dataset.n]);
+  });
+  wrap.addEventListener('mouseleave',apply);
+
+  [].forEach.call(document.querySelectorAll('.archkey'),function(btn){
+    btn.addEventListener('click',function(){
+      pinned=(pinned===btn.dataset.chain)?null:btn.dataset.chain;
+      [].forEach.call(document.querySelectorAll('.archkey'),function(b){
+        b.setAttribute('aria-pressed',String(b.dataset.chain===pinned));
+      });
+      apply();
+    });
+  });
+
+  draw();
+  if('ResizeObserver' in window) new ResizeObserver(draw).observe(wrap);
+  else addEventListener('resize',draw);
+  /* the grid's scroll-reveal transform settles after ~1s; geometry uses offsetLeft so this
+     is only a belt-and-braces redraw once fonts/emoji have finished shifting box heights */
+  addEventListener('load',draw);
+})();
+
+/* ---- beat racks (6.5 partitioning, 7.2 sub-capacity): one visual, several scenarios ----
+   Everything the beat changes is CSS keyed to [data-beat]; this only moves the attribute.
+   Markup ships in its pre-existing state, so no-JS and reduced-motion render exactly as before. */
+(function(){
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  [].forEach.call(document.querySelectorAll('.rk'),function(rk){
+    var btns=[].slice.call(rk.querySelectorAll('.beatb'));
+    if(!btns.length) return;
+    function show(b){
+      rk.dataset.beat=b;
+      btns.forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.beat===b));});
+    }
+    /* play the story once, the first time the rack is reached; any click cancels the rest */
+    var played=reduced, story=(rk.dataset.play||'').split(',').filter(Boolean);
+    btns.forEach(function(b){
+      b.addEventListener('click',function(){played=true;show(b.dataset.beat);});
+    });
+    if(played || !story.length || !('IntersectionObserver' in window)) return;
+    var io=new IntersectionObserver(function(en){
+      if(!en[0].isIntersecting||played) return;
+      played=true; io.disconnect();
+      show(story[0]);
+      story.slice(1).forEach(function(beat,i){
+        setTimeout(function(){
+          if(rk.dataset.beat===story[i]) show(beat);   /* a user click breaks the chain */
+        },2000*(i+1)+200*i);
+      });
+    },{threshold:.45});
+    io.observe(rk);
+  });
+})();
 </script>
 </body>
 </html>
